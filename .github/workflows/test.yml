@@ -27,7 +27,6 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           check-latest: '*'
-      - run: npm install -g netlify-cli
+      - run: yarn global add netlify-cli
       - run: yarn
-      - run: cd plugin && yarn && npm run build
-      - run: npm test
+      - run: yarn test
