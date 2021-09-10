@@ -14,7 +14,6 @@ exports.onCreateWebpackConfig = ({ actions, stage }) => {
   if (stage !== BUILD_HTML_STAGE && stage !== BUILD_CSS_STAGE) {
     return
   }
-
   actions.setWebpackConfig({
     plugins: [
       new WebpackAssetsManifest({
@@ -30,22 +29,25 @@ exports.onPostBuild = async (
   userPluginOptions
 ) => {
   const pluginData = makePluginData(store, assetsManifest, pathPrefix)
+  console.log(`onPostBuild`, { pluginData, assetsManifest })
   const pluginOptions = { ...DEFAULT_OPTIONS, ...userPluginOptions }
 
-  const { redirects } = store.getState()
+  const { redirects, pages } = store.getState()
 
-  let rewrites = []
-  if (pluginOptions.generateMatchPathRewrites) {
-    const { pages } = store.getState()
-    rewrites = Array.from(pages.values())
-      .filter(page => page.matchPath && page.matchPath !== page.path)
-      .map(page => {
-        return {
-          fromPath: page.matchPath,
-          toPath: page.path,
-        }
+  const rewrites = []
+  Array.from(pages.values()).forEach(page => {
+    const { mode, matchPath, path } = page
+    if (mode === `SSR`) {
+      rewrites.push({
+        fromPath: matchPath ?? path,
+        toPath: `/.netlify/functions/__ssr`,
       })
-  }
+    }
+    // return {
+    //   fromPath: page.matchPath,
+    //   toPath: page.path,
+    // }
+  })
 
   await Promise.all([
     buildHeadersProgram(pluginData, pluginOptions, reporter),
@@ -71,9 +73,7 @@ const pluginOptionsSchema = function ({ Joi }) {
     mergeLinkHeaders: Joi.boolean().description(
       `When set to true, turns off the default gatsby js headers`
     ),
-    mergeCachingHeaders: Joi.boolean().description(
-      `When set to true, turns off the default caching headers`
-    ),
+
     transformHeaders: Joi.function()
       .maxArity(2)
       .description(
