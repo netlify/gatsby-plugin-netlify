@@ -32,3 +32,9 @@ flow-typed
 coverage
 decls
 examples
+.github
+.eslintrc.js
+.eslintignore
+.prettierrc.js
+renovate.json
+.baberrc
