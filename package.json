@@ -15,6 +15,7 @@
   "dependencies": {
     "@babel/runtime": "^7.14.8",
     "fs-extra": "^10.0.0",
+    "gatsby-core-utils": "^3.0.0-alpha-9689ff.24",
     "kebab-hash": "^0.1.2",
     "lodash": "^4.17.21",
     "webpack-assets-manifest": "^5.0.6"
@@ -52,7 +53,7 @@
   "license": "MIT",
   "main": "index.js",
   "peerDependencies": {
-    "gatsby": "^4.0.0"
+    "gatsby": "^4.0.0-alpha"
   },
   "repository": {
     "type": "git",

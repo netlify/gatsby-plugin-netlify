@@ -1,7 +1,7 @@
 // https://www.netlify.com/docs/headers-and-basic-auth/
 
 import WebpackAssetsManifest from "webpack-assets-manifest"
-
+import { generatePageDataPath } from "gatsby-core-utils"
 import makePluginData from "./plugin-data"
 import buildHeadersProgram from "./build-headers-program"
 import createRedirects from "./create-redirects"
@@ -29,7 +29,6 @@ exports.onPostBuild = async (
   userPluginOptions
 ) => {
   const pluginData = makePluginData(store, assetsManifest, pathPrefix)
-  console.log(`onPostBuild`, { pluginData, assetsManifest })
   const pluginOptions = { ...DEFAULT_OPTIONS, ...userPluginOptions }
 
   const { redirects, pages } = store.getState()
@@ -38,10 +37,16 @@ exports.onPostBuild = async (
   Array.from(pages.values()).forEach(page => {
     const { mode, matchPath, path } = page
     if (mode === `SSR`) {
-      rewrites.push({
-        fromPath: matchPath ?? path,
-        toPath: `/.netlify/functions/__ssr`,
-      })
+      rewrites.push(
+        {
+          fromPath: matchPath ?? path,
+          toPath: `/.netlify/functions/__ssr`,
+        },
+        {
+          fromPath: generatePageDataPath(`/`, matchPath ?? path),
+          toPath: `/.netlify/functions/__ssr`,
+        }
+      )
     }
     // return {
     //   fromPath: page.matchPath,
