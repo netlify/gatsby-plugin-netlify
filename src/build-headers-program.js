@@ -2,12 +2,11 @@ import _ from "lodash"
 import { writeFile, existsSync } from "fs-extra"
 import { parse, posix } from "path"
 import kebabHash from "kebab-hash"
-import { HEADER_COMMENT, IMMUTABLE_CACHING_HEADER } from "./constants"
+import { HEADER_COMMENT } from "./constants"
 
 import {
   COMMON_BUNDLES,
   SECURITY_HEADERS,
-  CACHING_HEADERS,
   LINK_REGEX,
   NETLIFY_HEADERS_FILENAME,
   PAGE_DATA_DIR,
@@ -219,16 +218,14 @@ const validateUserOptions = (pluginOptions, reporter) => headers => {
     )
   }
 
-  ;[`mergeSecurityHeaders`, `mergeLinkHeaders`, `mergeCachingHeaders`].forEach(
-    mergeOption => {
-      if (!_.isBoolean(pluginOptions[mergeOption])) {
-        throw new Error(
-          `The "${mergeOption}" option to gatsby-plugin-netlify must be a boolean. ` +
-            `Check your gatsby-config.js.`
-        )
-      }
+  ;[`mergeSecurityHeaders`, `mergeLinkHeaders`].forEach(mergeOption => {
+    if (!_.isBoolean(pluginOptions[mergeOption])) {
+      throw new Error(
+        `The "${mergeOption}" option to gatsby-plugin-netlify must be a boolean. ` +
+          `Check your gatsby-config.js.`
+      )
     }
-  )
+  })
 
   if (!_.isFunction(pluginOptions.transformHeaders)) {
     throw new Error(
@@ -299,44 +296,6 @@ const applySecurityHeaders =
     return headersMerge(headers, SECURITY_HEADERS)
   }
 
-const applyCachingHeaders =
-  (pluginData, { mergeCachingHeaders }) =>
-  headers => {
-    if (!mergeCachingHeaders) {
-      return headers
-    }
-
-    let chunks = []
-    // Gatsby v3.5 added componentChunkName to store().components
-    // So we prefer to pull chunk names off that as it gets very expensive to loop
-    // over large numbers of pages.
-    const isComponentChunkSet = !!pluginData.components.entries()?.next()
-      ?.value[1]?.componentChunkName
-    if (isComponentChunkSet) {
-      chunks = [...pluginData.components.values()].map(
-        c => c.componentChunkName
-      )
-    } else {
-      chunks = Array.from(pluginData.pages.values()).map(
-        page => page.componentChunkName
-      )
-    }
-
-    chunks.push(`pages-manifest`, `app`)
-
-    const files = [].concat(...chunks.map(chunk => pluginData.manifest[chunk]))
-
-    const cachingHeaders = {}
-
-    files.forEach(file => {
-      if (typeof file === `string`) {
-        cachingHeaders[`/` + file] = [IMMUTABLE_CACHING_HEADER]
-      }
-    })
-
-    return defaultMerge(headers, cachingHeaders, CACHING_HEADERS)
-  }
-
 const applyTransfromHeaders =
   ({ transformHeaders }) =>
   headers =>
@@ -359,7 +318,6 @@ export default function buildHeadersProgram(
     validateUserOptions(pluginOptions, reporter),
     mapUserLinkHeaders(pluginData),
     applySecurityHeaders(pluginOptions),
-    applyCachingHeaders(pluginData, pluginOptions),
     mapUserLinkAllPageHeaders(pluginData, pluginOptions),
     applyLinkHeaders(pluginData, pluginOptions),
     applyTransfromHeaders(pluginOptions),

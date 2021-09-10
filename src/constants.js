@@ -25,13 +25,6 @@ export const SECURITY_HEADERS = {
   ],
 }
 
-export const IMMUTABLE_CACHING_HEADER = `Cache-Control: public, max-age=31536000, immutable`
-
-export const CACHING_HEADERS = {
-  "/static/*": [IMMUTABLE_CACHING_HEADER],
-  "/sw.js": [`Cache-Control: no-cache`],
-}
-
 export const LINK_REGEX = /^(Link: <\/)(.+)(>;.+)/
 export const ROOT_WILDCARD = `/*`
 
