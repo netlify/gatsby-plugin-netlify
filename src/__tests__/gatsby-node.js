@@ -8,7 +8,6 @@ describe(`gatsby-node.js`, () => {
       `"allPageHeaders" must be an array`,
       `"mergeSecurityHeaders" must be a boolean`,
       `"mergeLinkHeaders" must be a boolean`,
-      `"mergeCachingHeaders" must be a boolean`,
       `"transformHeaders" must have an arity lesser or equal to 2`,
       `"generateMatchPathRewrites" must be a boolean`,
     ]
@@ -18,7 +17,6 @@ describe(`gatsby-node.js`, () => {
       allPageHeaders: `this should be an array`,
       mergeSecurityHeaders: `this should be a boolean`,
       mergeLinkHeaders: `this should be a boolean`,
-      mergeCachingHeaders: `this should be a boolean`,
       transformHeaders: (too, many, args) => ``,
       generateMatchPathRewrites: `this should be a boolean`,
     })
@@ -35,7 +33,6 @@ describe(`gatsby-node.js`, () => {
       allPageHeaders: [`First header`, `Second header`],
       mergeSecurityHeaders: true,
       mergeLinkHeaders: false,
-      mergeCachingHeaders: true,
       transformHeaders: () => null,
       generateMatchPathRewrites: false,
     })

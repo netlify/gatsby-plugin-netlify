@@ -71,9 +71,6 @@ const pluginOptionsSchema = function ({ Joi }) {
     mergeLinkHeaders: Joi.boolean().description(
       `When set to true, turns off the default gatsby js headers`
     ),
-    mergeCachingHeaders: Joi.boolean().description(
-      `When set to true, turns off the default caching headers`
-    ),
     transformHeaders: Joi.function()
       .maxArity(2)
       .description(
