@@ -32,11 +32,13 @@ exports.onPostBuild = async (
   const pluginOptions = { ...DEFAULT_OPTIONS, ...userPluginOptions }
 
   const { redirects, pages } = store.getState()
-
+  reporter.info(`[gatsby-plugin-netlify] Creating SSR redirects...`)
+  let count = 0
   const rewrites = []
   Array.from(pages.values()).forEach(page => {
     const { mode, matchPath, path } = page
     if (mode === `SSR`) {
+      count++
       rewrites.push(
         {
           fromPath: matchPath ?? path,
@@ -53,6 +55,11 @@ exports.onPostBuild = async (
     //   toPath: page.path,
     // }
   })
+  reporter.info(
+    `[gatsby-plugin-netlify] Creating ${count} SSR redirect${
+      count === 1 ? `` : `s`
+    }...`
+  )
 
   await Promise.all([
     buildHeadersProgram(pluginData, pluginOptions, reporter),
