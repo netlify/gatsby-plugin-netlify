@@ -5441,10 +5441,10 @@ gatsby-core-utils@3.0.0-alpha-9689ff.27+e37a439cea:
     tmp "^0.2.1"
     xdg-basedir "^4.0.0"
 
-gatsby-core-utils@^3.0.0-alpha-9689ff.24:
-  version "3.0.0-alpha-9689ff.24"
-  resolved "https://registry.yarnpkg.com/gatsby-core-utils/-/gatsby-core-utils-3.0.0-alpha-9689ff.24.tgz#6ebcc5899600f96f8652b8e933c5f054bd4d7b51"
-  integrity sha512-8mYw2HgOwrCh3VCEvSjWLuM/c8FXy1h0+TahIA6tUJgsdJxBgquPUoB7KtqRjaiGv04V+kfQMe93YWUhYvp63w==
+gatsby-core-utils@^3.0.0-next.0:
+  version "3.0.0-next.0"
+  resolved "https://registry.yarnpkg.com/gatsby-core-utils/-/gatsby-core-utils-3.0.0-next.0.tgz#0acb5bf02b265b249062e1577e70b80210c57146"
+  integrity sha512-UlzxhmT1TZJGOWLuDAOcs4huBsk9Bw0FNdgXpr3PGAdhcUzyM8iy6pBlTWZHGX/uItVqo+5H07J2eKJ7i49wBg==
   dependencies:
     "@babel/runtime" "^7.15.4"
     ci-info "2.0.0"
