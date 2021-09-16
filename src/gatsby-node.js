@@ -50,13 +50,18 @@ exports.onPostBuild = async (
         }
       )
     }
-    // return {
-    //   fromPath: page.matchPath,
-    //   toPath: page.path,
-    // }
+    if (
+      pluginOptions.generateMatchPathRewrites &&
+      page.matchPath !== page.path
+    ) {
+      rewrites.push({
+        fromPath: page.matchPath,
+        toPath: page.path,
+      })
+    }
   })
   reporter.info(
-    `[gatsby-plugin-netlify] Creating ${count} SSR redirect${
+    `[gatsby-plugin-netlify] Created ${count} SSR redirect${
       count === 1 ? `` : `s`
     }...`
   )
