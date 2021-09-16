@@ -5,7 +5,12 @@ import { generatePageDataPath } from "gatsby-core-utils"
 import makePluginData from "./plugin-data"
 import buildHeadersProgram from "./build-headers-program"
 import createRedirects from "./create-redirects"
-import { DEFAULT_OPTIONS, BUILD_HTML_STAGE, BUILD_CSS_STAGE } from "./constants"
+import {
+  DEFAULT_OPTIONS,
+  BUILD_HTML_STAGE,
+  BUILD_CSS_STAGE,
+  PAGE_COUNT_WARN,
+} from "./constants"
 
 const assetsManifest = {}
 
@@ -32,6 +37,14 @@ exports.onPostBuild = async (
   const pluginOptions = { ...DEFAULT_OPTIONS, ...userPluginOptions }
 
   const { redirects, pages } = store.getState()
+  if (
+    pages.size > PAGE_COUNT_WARN &&
+    (pluginOptions.mergeCachingHeaders || pluginOptions.mergeLinkHeaders)
+  ) {
+    reporter.warn(
+      `[gatsby-plugin-netlify] Your site has ${pages.size} pages, which means that the generated headers file could become very large. Consider disabling "mergeCachingHeaders" and "mergeLinkHeaders" in your plugin config`
+    )
+  }
   reporter.info(`[gatsby-plugin-netlify] Creating SSR redirects...`)
   let count = 0
   const rewrites = []
@@ -85,13 +98,13 @@ const pluginOptionsSchema = function ({ Joi }) {
       .items(Joi.string())
       .description(`Add more headers to all the pages`),
     mergeSecurityHeaders: Joi.boolean().description(
-      `When set to true, turns off the default security headers`
+      `When set to false, turns off the default security headers`
     ),
     mergeLinkHeaders: Joi.boolean().description(
-      `When set to true, turns off the default gatsby js headers`
+      `When set to false, turns off the default gatsby js headers`
     ),
     mergeCachingHeaders: Joi.boolean().description(
-      `When set to true, turns off the default caching headers`
+      `When set to false, turns off the default caching headers`
     ),
     transformHeaders: Joi.function()
       .maxArity(2)
@@ -99,7 +112,7 @@ const pluginOptionsSchema = function ({ Joi }) {
         `Transform function for manipulating headers under each path (e.g.sorting), etc. This should return an object of type: { key: Array<string> }`
       ),
     generateMatchPathRewrites: Joi.boolean().description(
-      `When set to true, turns off automatic creation of redirect rules for client only paths`
+      `When set to false, turns off automatic creation of redirect rules for client only paths`
     ),
   })
 }
