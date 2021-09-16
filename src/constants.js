@@ -11,6 +11,7 @@ export const DEFAULT_OPTIONS = {
   headers: {},
   mergeSecurityHeaders: true,
   mergeLinkHeaders: true,
+  mergeCachingHeaders: true,
   transformHeaders: _.identity, // optional transform for manipulating headers for sorting, etc
   generateMatchPathRewrites: true, // generate rewrites for client only paths
 }
@@ -22,6 +23,13 @@ export const SECURITY_HEADERS = {
     `X-Content-Type-Options: nosniff`,
     `Referrer-Policy: same-origin`,
   ],
+}
+
+export const IMMUTABLE_CACHING_HEADER = `Cache-Control: public, max-age=31536000, immutable`
+
+export const CACHING_HEADERS = {
+  "/static/*": [IMMUTABLE_CACHING_HEADER],
+  "/sw.js": [`Cache-Control: no-cache`],
 }
 
 export const LINK_REGEX = /^(Link: <\/)(.+)(>;.+)/
