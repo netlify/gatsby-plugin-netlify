@@ -8530,9 +8530,9 @@ pify@^4.0.1:
   integrity sha512-uB80kBFb/tfd68bVleG9T5GGsGPjJrLAUpR5PZIrhBnIaRTQRjqdJSsIKkOP6OAIFbj7GOrcudc5pNjZ+geV2g==
 
 pirates@^4.0.1:
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/pirates/-/pirates-4.0.1.tgz#643a92caf894566f91b2b986d2c66950a8e2fb87"
-  integrity sha512-WuNqLTbMI3tmfef2TKxlQmAiLHKtFhlsCZnPIpuv2Ow0RDVO8lfy1Opf4NUzlMXLjPl+Men7AuVdX6TA+s+uGA==
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/pirates/-/pirates-4.0.2.tgz#74c3e094412a3f13a94eccadc0e8fd7f8ab70cb3"
+  integrity sha512-VPxHpPfPbxIEdH2/KPkBl1/YbrBFzOxxTyQ4zEWh9hgWozoSGfgx25qx8yuhe5wnD3/pwamKXu3v3VoFbkLeaA==
   dependencies:
     node-modules-regexp "^1.0.0"
 
