@@ -1,5 +1,5 @@
 import { HEADER_COMMENT } from "./constants"
-import { exists, readFile, writeFile } from "fs-extra"
+import { existsSync, readFile, writeFile } from "fs-extra"
 
 export default async function writeRedirectsFile(
   pluginData,
@@ -71,7 +71,7 @@ export default async function writeRedirectsFile(
   // Websites may also have statically defined redirects
   // In that case we should append to them (not overwrite)
   // Make sure we aren't just looking at previous build results though
-  const fileExists = await exists(FILE_PATH)
+  const fileExists = existsSync(FILE_PATH)
   let fileContents = ``
   if (fileExists) {
     fileContents = await readFile(FILE_PATH, `utf8`)
