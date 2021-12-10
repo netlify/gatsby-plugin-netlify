@@ -179,6 +179,24 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 - **gatsby:** release plugin option validation ([#27437](https://github.com/gatsbyjs/gatsby/issues/27437)) ([41ae1c0](https://github.com/gatsbyjs/gatsby/commit/41ae1c07ad9919655782ef17feed8cf4f14f12d8))
 
+## 1.0.0 (2021-12-10)
+
+
+### ⚠ BREAKING CHANGES
+
+* remove cache headers
+* remove cache headers
+
+### Features
+
+* remove cache headers ([9f88d08](https://www.github.com/netlify/gatsby-plugin-netlify/commit/9f88d0825abefcca6b5a7d7618ee6af476c49bf3))
+* remove cache headers ([0167e60](https://www.github.com/netlify/gatsby-plugin-netlify/commit/0167e605fce111ef9a727513e369796f72fbee29))
+
+
+### Bug Fixes
+
+* add page data rewrites ([dacf876](https://www.github.com/netlify/gatsby-plugin-netlify/commit/dacf8768aac62d5be25edf1558f768f253fea4f8))
+
 ## [2.3.25](https://github.com/gatsbyjs/gatsby/compare/gatsby-plugin-netlify@2.3.24...gatsby-plugin-netlify@2.3.25) (2020-10-28)
 
 **Note:** Version bump only for package gatsby-plugin-netlify
