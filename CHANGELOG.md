@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.0.0 (2022-01-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* remove cache headers
+* remove cache headers
+
+### Features
+
+* remove cache headers ([9f88d08](https://www.github.com/netlify/gatsby-plugin-netlify/commit/9f88d0825abefcca6b5a7d7618ee6af476c49bf3))
+* remove cache headers ([0167e60](https://www.github.com/netlify/gatsby-plugin-netlify/commit/0167e605fce111ef9a727513e369796f72fbee29))
+
+
+### Bug Fixes
+
+* add page data rewrites ([dacf876](https://www.github.com/netlify/gatsby-plugin-netlify/commit/dacf8768aac62d5be25edf1558f768f253fea4f8))
+
 ## [3.13.0-next.0](https://github.com/gatsbyjs/gatsby/compare/gatsby-plugin-netlify@3.12.0-next.3...gatsby-plugin-netlify@3.13.0-next.0) (2021-08-12)
 
 **Note:** Version bump only for package gatsby-plugin-netlify
