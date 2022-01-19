@@ -1,4 +1,4 @@
 module.exports = {
-  arrowParens: `avoid`,
-  semi: false,
+  ...require("@netlify/eslint-config-node/.prettierrc.json"),
+  endOfLine: "auto",
 }

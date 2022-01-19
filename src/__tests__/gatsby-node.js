@@ -1,4 +1,5 @@
 import { testPluginOptionsSchema } from "gatsby-plugin-utils"
+
 import { pluginOptionsSchema } from "../gatsby-node"
 
 describe(`gatsby-node.js`, () => {
