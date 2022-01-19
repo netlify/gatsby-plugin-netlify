@@ -1,11 +1,18 @@
 # gatsby-plugin-netlify
 
-Automatically generates a `_headers` file and a `_redirects` file at the root of the public folder to configure
-[HTTP headers](https://www.netlify.com/docs/headers-and-basic-auth/) and [redirects](https://www.netlify.com/docs/redirects/) on Netlify.
+This plugin adds support for Gatsby SSR and DSG on Netlify, and handles Gatsby redirects and headers.
 
-By default, the plugin will add some basic security headers. You can easily add or replace headers through the plugin config.
+The plugin works by automatically generating a `_headers` and `_redirects` file at the root of the public folder to
+configure [HTTP headers](https://www.netlify.com/docs/headers-and-basic-auth/) and
+[redirects](https://www.netlify.com/docs/redirects/) on Netlify.
 
-**When not to use the plugin:** In case you just want to use a `_redirects` or `_headers` file for Netlify with Gatsby, you don't need this plugin. Instead, move those files in `/static/_redirects`, `/static/_headers` and Gatsby will copy them to your root folder during build where Netlify will pick them up.
+By default, the plugin will add some basic security headers. You can easily add or replace headers through the plugin
+config.
+
+**When not to use the plugin:** In case you just want to use your own `_redirects` or `_headers` file for Netlify with
+Gatsby, you don't need this plugin. Instead, move those files in `/static/_redirects`, `/static/_headers` and Gatsby
+will copy them to your root folder during build where Netlify will pick them up. Note that this plugin is still required
+if you want to use SSR or DSG rendering.
 
 ## Install
 
@@ -20,9 +27,8 @@ plugins: [`gatsby-plugin-netlify`]
 
 ## Configuration
 
-If you just need the critical assets, you don't need to add any additional
-config. However, if you want to add headers, remove default headers, or
-transform the given headers, you can use the following configuration options.
+If you just need the critical assets, you don't need to add any additional config. However, if you want to add headers,
+remove default headers, or transform the given headers, you can use the following configuration options.
 
 ```javascript
 plugins: [
@@ -44,9 +50,8 @@ plugins: [
 ### Headers
 
 The headers object represents a JS version of the
-[Netlify `_headers` file format](https://www.netlify.com/docs/headers-and-basic-auth/).
-You should pass in an object with string keys (representing the paths) and an
-array of strings for each header.
+[Netlify `_headers` file format](https://www.netlify.com/docs/headers-and-basic-auth/). You should pass in an object
+with string keys (representing the paths) and an array of strings for each header.
 
 An example:
 
@@ -66,13 +71,13 @@ An example:
 }
 ```
 
-Link paths are specially handled by this plugin. Since most files are processed
-and cache-busted through Gatsby (with a file hash), the plugin will transform
-any base file names to the hashed variants. If the file is not hashed, it will
-ensure the path is valid relative to the output `public` folder. You should be
-able to reference assets imported through javascript in the `static` folder.
+Link paths are specially handled by this plugin. Since most files are processed and cache-busted through Gatsby (with a
+file hash), the plugin will transform any base file names to the hashed variants. If the file is not hashed, it will
+ensure the path is valid relative to the output `public` folder. You should be able to reference assets imported through
+javascript in the `static` folder.
 
-When `mergeLinkHeaders` is true, as it is by default, this plugin will generate HTTP preload headers for the asset paths for all of your application's pages.
+When `mergeLinkHeaders` is true, as it is by default, this plugin will generate HTTP preload headers for the asset paths
+for all of your application's pages.
 
 An example:
 
@@ -90,17 +95,15 @@ An example:
 
 Therefore, expect the size of the `_headers` file to grow linearly with the number of pages in your application.
 
-> **Note:** Gatsby also adds these preload tags in your pages' index.html files, whether or not you are using this plugin.
+> **Note:** Gatsby also adds these preload tags in your pages' index.html files, whether or not you are using this
+> plugin.
 
-Do not specify the public path in the config, as the plugin will provide it for
-you.
+Do not specify the public path in the config, as the plugin will provide it for you.
 
-The Netlify `_headers` file does not inherit headers, and it will replace any
-matching headers it finds in more specific routes. For example, if you add a
-link to the root wildcard path (`/*`), it will be replaced by any more
-specific path. If you want a resource to put linked across the site, you will
-have to add to every path. To make this easier, the plugin provides the
-`allPageHeaders` option to inject the same headers on every path.
+The Netlify `_headers` file does not inherit headers, and it will replace any matching headers it finds in more specific
+routes. For example, if you add a link to the root wildcard path (`/*`), it will be replaced by any more specific path.
+If you want a resource to put linked across the site, you will have to add to every path. To make this easier, the
+plugin provides the `allPageHeaders` option to inject the same headers on every path.
 
 ```javascript
 {
@@ -117,8 +120,7 @@ have to add to every path. To make this easier, the plugin provides the
 }
 ```
 
-You can validate the `_headers` config through the
-[Netlify playground app](https://play.netlify.com/headers).
+You can validate the `_headers` config through the [Netlify playground app](https://play.netlify.com/headers).
 
 ### Redirects
 
@@ -134,16 +136,17 @@ In addition to the options provided by the Gatsby API, you can pass these option
 An example:
 
 ```javascript
-createRedirect({ fromPath: "/old-url", toPath: "/new-url", isPermanent: true })
-createRedirect({ fromPath: "/url", toPath: "/zn-CH/url", Language: "zn" })
+createRedirect({ fromPath: '/old-url', toPath: '/new-url', isPermanent: true })
+createRedirect({ fromPath: '/url', toPath: '/zn-CH/url', Language: 'zn' })
 createRedirect({
-  fromPath: "/url_that_is/not_pretty",
-  toPath: "/pretty/url",
+  fromPath: '/url_that_is/not_pretty',
+  toPath: '/pretty/url',
   statusCode: 200,
 })
 ```
 
-You can also create a `_redirects` file in the `static` folder for the same effect. Any programmatically created redirects will be appended to the file.
+You can also create a `_redirects` file in the `static` folder for the same effect. Any programmatically created
+redirects will be appended to the file.
 
 ```shell
 # my manually set redirects
@@ -151,9 +154,13 @@ You can also create a `_redirects` file in the `static` folder for the same effe
 /blog/my-post.php  /blog/my-post
 ```
 
-You can validate the `_redirects` config through the
-[Netlify playground app](https://play.netlify.com/redirects).
+You can validate the `_redirects` config through the [Netlify playground app](https://play.netlify.com/redirects).
 
-Redirect rules are automatically added for [client only paths](https://www.gatsbyjs.org/docs/client-only-routes-and-user-authentication). The plugin uses the [matchPath](https://www.gatsbyjs.org/docs/gatsby-internals-terminology/#matchpath) syntax to match all possible requests in the range of your client-side routes and serves the HTML file for the client-side route. Without it, only the exact route of the client-side route works.
+Redirect rules are automatically added for
+[client only paths](https://www.gatsbyjs.org/docs/client-only-routes-and-user-authentication). The plugin uses the
+[matchPath](https://www.gatsbyjs.org/docs/gatsby-internals-terminology/#matchpath) syntax to match all possible requests
+in the range of your client-side routes and serves the HTML file for the client-side route. Without it, only the exact
+route of the client-side route works.
 
-If those rules are conflicting with custom rules or if you want to have more control over them you can disable them in [configuration](#configuration) by setting `generateMatchPathRewrites` to `false`.
+If those rules are conflicting with custom rules or if you want to have more control over them you can disable them in
+[configuration](#configuration) by setting `generateMatchPathRewrites` to `false`.
