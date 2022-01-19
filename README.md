@@ -5,6 +5,8 @@ Automatically generates a `_headers` file and a `_redirects` file at the root of
 
 By default, the plugin will add some basic security headers. You can easily add or replace headers through the plugin config.
 
+**When not to use the plugin:** In case you just want to use a `_redirects` or `_headers` file for Netlify with Gatsby, you don't need this plugin. Instead, move those files in `/static/_redirects`, `/static/_headers` and Gatsby will copy them to your root folder during build where Netlify will pick them up.
+
 ## Install
 
 `npm install gatsby-plugin-netlify`

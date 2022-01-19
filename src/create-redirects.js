@@ -1,19 +1,17 @@
-import { HEADER_COMMENT } from "./constants"
-import { existsSync, readFile, writeFile } from "fs-extra"
+import { existsSync, readFile, writeFile } from 'fs-extra'
 
-export default async function writeRedirectsFile(
-  pluginData,
-  redirects,
-  rewrites
-) {
+import { HEADER_COMMENT } from './constants'
+
+// eslint-disable-next-line max-statements
+export default async function writeRedirectsFile(pluginData, redirects, rewrites) {
   const { publicFolder } = pluginData
 
-  if (!redirects.length && !rewrites.length) return null
+  if (redirects.length === 0 && rewrites.length === 0) return null
 
   const FILE_PATH = publicFolder(`_redirects`)
 
   // https://www.netlify.com/docs/redirects/
-  const NETLIFY_REDIRECT_KEYWORDS_ALLOWLIST = [
+  const NETLIFY_REDIRECT_KEYWORDS_ALLOWLIST = new Set([
     `query`,
     `conditions`,
     `headers`,
@@ -21,19 +19,11 @@ export default async function writeRedirectsFile(
     `edge_handler`,
     `Language`,
     `Country`,
-  ]
+  ])
 
   // Map redirect data to the format Netlify expects
-  redirects = redirects.map(redirect => {
-    const {
-      fromPath,
-      isPermanent,
-      redirectInBrowser, // eslint-disable-line no-unused-vars
-      force,
-      toPath,
-      statusCode,
-      ...rest
-    } = redirect
+  redirects = redirects.map((redirect) => {
+    const { fromPath, isPermanent, redirectInBrowser, force, toPath, statusCode, ...rest } = redirect
 
     let status = isPermanent ? `301` : `302`
     if (statusCode) status = String(statusCode)
@@ -49,22 +39,17 @@ export default async function writeRedirectsFile(
 
       if (typeof value === `string` && value.includes(` `)) {
         console.warn(
-          `Invalid redirect value "${value}" specified for key "${key}". ` +
-            `Values should not contain spaces.`
+          `Invalid redirect value "${value}" specified for key "${key}". ` + `Values should not contain spaces.`,
         )
-      } else {
-        if (NETLIFY_REDIRECT_KEYWORDS_ALLOWLIST.includes(key)) {
-          pieces.push(`${key}=${value}`)
-        }
+      } else if (NETLIFY_REDIRECT_KEYWORDS_ALLOWLIST.has(key)) {
+        pieces.push(`${key}=${value}`)
       }
     }
 
     return pieces.join(`  `)
   })
 
-  rewrites = rewrites.map(
-    ({ fromPath, toPath }) => `${fromPath}  ${toPath}  200`
-  )
+  rewrites = rewrites.map(({ fromPath, toPath }) => `${fromPath}  ${toPath}  200`)
 
   let commentFound = false
 
@@ -85,8 +70,5 @@ export default async function writeRedirectsFile(
     data = fileContents
   }
 
-  return writeFile(
-    FILE_PATH,
-    [data, HEADER_COMMENT, ...redirects, ...rewrites].join(`\n`)
-  )
+  return writeFile(FILE_PATH, [data, HEADER_COMMENT, ...redirects, ...rewrites].join(`\n`))
 }
