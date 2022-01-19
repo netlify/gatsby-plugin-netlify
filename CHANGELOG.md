@@ -1,7 +1,11 @@
 # Change Log
 
-All notable changes to this project will be documented in this file.
-See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 4.0.0 (2022-01-19)
+
+Add support for Gatsby 4, including adding the rewrites required for DPR and SSR render modes.
 
 ## [3.13.0-next.0](https://github.com/gatsbyjs/gatsby/compare/gatsby-plugin-netlify@3.12.0-next.3...gatsby-plugin-netlify@3.13.0-next.0) (2021-08-12)
 
@@ -19,7 +23,9 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-- **deps:** update dependency webpack-assets-manifest to ^5.0.6 for gatsby-plugin-netlify ([#32593](https://github.com/gatsbyjs/gatsby/issues/32593)) ([fa0f286](https://github.com/gatsbyjs/gatsby/commit/fa0f2863a7dfd51c0323032e80aa9f1868d2e506))
+- **deps:** update dependency webpack-assets-manifest to ^5.0.6 for gatsby-plugin-netlify
+  ([#32593](https://github.com/gatsbyjs/gatsby/issues/32593))
+  ([fa0f286](https://github.com/gatsbyjs/gatsby/commit/fa0f2863a7dfd51c0323032e80aa9f1868d2e506))
 
 ## [3.12.0-next.0](https://github.com/gatsbyjs/gatsby/compare/gatsby-plugin-netlify@3.11.0-next.0...gatsby-plugin-netlify@3.12.0-next.0) (2021-07-29)
 
@@ -61,7 +67,9 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-- **gatsby:** add componentChunkName to components list so don't need to loop over pages ([#31547](https://github.com/gatsbyjs/gatsby/issues/31547)) ([783b937](https://github.com/gatsbyjs/gatsby/commit/783b937c8f70478796bce37808bf8bf967bb4252))
+- **gatsby:** add componentChunkName to components list so don't need to loop over pages
+  ([#31547](https://github.com/gatsbyjs/gatsby/issues/31547))
+  ([783b937](https://github.com/gatsbyjs/gatsby/commit/783b937c8f70478796bce37808bf8bf967bb4252))
 
 ## [3.7.0-next.0](https://github.com/gatsbyjs/gatsby/compare/gatsby-plugin-netlify@3.6.0-next.0...gatsby-plugin-netlify@3.7.0-next.0) (2021-05-21)
 
@@ -79,7 +87,8 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-- **deps:** update minor and patch for gatsby-plugin-netlify ([#30680](https://github.com/gatsbyjs/gatsby/issues/30680)) ([118105b](https://github.com/gatsbyjs/gatsby/commit/118105bbd9849b3ca263d0bd8cc37f93f78b658e))
+- **deps:** update minor and patch for gatsby-plugin-netlify ([#30680](https://github.com/gatsbyjs/gatsby/issues/30680))
+  ([118105b](https://github.com/gatsbyjs/gatsby/commit/118105bbd9849b3ca263d0bd8cc37f93f78b658e))
 
 ## [3.4.0-next.0](https://github.com/gatsbyjs/gatsby/compare/gatsby-plugin-netlify@3.3.0-next.1...gatsby-plugin-netlify@3.4.0-next.0) (2021-04-09)
 
@@ -97,19 +106,24 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-- **gatsby-plugin-netlify:** upgrade webpack-assets-manifest for compatibility with webpack@5 ([#30217](https://github.com/gatsbyjs/gatsby/issues/30217)) ([ca44a9e](https://github.com/gatsbyjs/gatsby/commit/ca44a9eb04878919ee52874a5e879a1a29ee0463))
+- **gatsby-plugin-netlify:** upgrade webpack-assets-manifest for compatibility with webpack@5
+  ([#30217](https://github.com/gatsbyjs/gatsby/issues/30217))
+  ([ca44a9e](https://github.com/gatsbyjs/gatsby/commit/ca44a9eb04878919ee52874a5e879a1a29ee0463))
 
 ## [3.2.0-next.0](https://github.com/gatsbyjs/gatsby/compare/gatsby-plugin-netlify@3.1.0-next.2...gatsby-plugin-netlify@3.2.0-next.0) (2021-03-11)
 
 ### Bug Fixes
 
-- **gatsby-plugin-netlify:** Add an allow list for redirect options ([#30155](https://github.com/gatsbyjs/gatsby/issues/30155)) ([962c4a1](https://github.com/gatsbyjs/gatsby/commit/962c4a1d3d8a5c952ec88957bdc20352bbeb151c))
+- **gatsby-plugin-netlify:** Add an allow list for redirect options
+  ([#30155](https://github.com/gatsbyjs/gatsby/issues/30155))
+  ([962c4a1](https://github.com/gatsbyjs/gatsby/commit/962c4a1d3d8a5c952ec88957bdc20352bbeb151c))
 
 ## [3.1.0-next.2](https://github.com/gatsbyjs/gatsby/compare/gatsby-plugin-netlify@3.1.0-next.1...gatsby-plugin-netlify@3.1.0-next.2) (2021-03-10)
 
 ### Bug Fixes
 
-- **deps:** update lodash monorepo to ^4.17.21 ([#29382](https://github.com/gatsbyjs/gatsby/issues/29382)) ([9fd287b](https://github.com/gatsbyjs/gatsby/commit/9fd287ba89eacd55652d468b18f6e1526230e7c6))
+- **deps:** update lodash monorepo to ^4.17.21 ([#29382](https://github.com/gatsbyjs/gatsby/issues/29382))
+  ([9fd287b](https://github.com/gatsbyjs/gatsby/commit/9fd287ba89eacd55652d468b18f6e1526230e7c6))
 
 ## [3.1.0-next.1](https://github.com/gatsbyjs/gatsby/compare/gatsby-plugin-netlify@3.1.0-next.0...gatsby-plugin-netlify@3.1.0-next.1) (2021-02-26)
 
@@ -147,7 +161,8 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-- **gatsby-plugin-netlify:** fix typo ([#28907](https://github.com/gatsbyjs/gatsby/issues/28907)) ([0e20f01](https://github.com/gatsbyjs/gatsby/commit/0e20f012be72f13f20b782b5f0b8939244b7cd7a))
+- **gatsby-plugin-netlify:** fix typo ([#28907](https://github.com/gatsbyjs/gatsby/issues/28907))
+  ([0e20f01](https://github.com/gatsbyjs/gatsby/commit/0e20f012be72f13f20b782b5f0b8939244b7cd7a))
 
 ## [2.10.0-next.0](https://github.com/gatsbyjs/gatsby/compare/gatsby-plugin-netlify@2.9.0-next.1...gatsby-plugin-netlify@2.10.0-next.0) (2020-12-29)
 
@@ -177,7 +192,8 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
-- **gatsby:** release plugin option validation ([#27437](https://github.com/gatsbyjs/gatsby/issues/27437)) ([41ae1c0](https://github.com/gatsbyjs/gatsby/commit/41ae1c07ad9919655782ef17feed8cf4f14f12d8))
+- **gatsby:** release plugin option validation ([#27437](https://github.com/gatsbyjs/gatsby/issues/27437))
+  ([41ae1c0](https://github.com/gatsbyjs/gatsby/commit/41ae1c07ad9919655782ef17feed8cf4f14f12d8))
 
 ## [2.3.25](https://github.com/gatsbyjs/gatsby/compare/gatsby-plugin-netlify@2.3.24...gatsby-plugin-netlify@2.3.25) (2020-10-28)
 
@@ -191,7 +207,8 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-- Update plugin schema testing util and associated tests ([#27574](https://github.com/gatsbyjs/gatsby/issues/27574)) ([6d81283](https://github.com/gatsbyjs/gatsby/commit/6d81283e4f47ae2cb571626bf4d02fcd2c9d1af4))
+- Update plugin schema testing util and associated tests ([#27574](https://github.com/gatsbyjs/gatsby/issues/27574))
+  ([6d81283](https://github.com/gatsbyjs/gatsby/commit/6d81283e4f47ae2cb571626bf4d02fcd2c9d1af4))
 
 ## [2.3.22](https://github.com/gatsbyjs/gatsby/compare/gatsby-plugin-netlify@2.3.21...gatsby-plugin-netlify@2.3.22) (2020-10-20)
 
@@ -281,8 +298,12 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-- **gatsby-plugin-netlify:** Add missing space in error message ([#23722](https://github.com/gatsbyjs/gatsby/issues/23722)) ([f6a48cf](https://github.com/gatsbyjs/gatsby/commit/f6a48cf))
-- **gatsby-plugin-netlify:** Fix heuristic for appending redirects ([#23743](https://github.com/gatsbyjs/gatsby/issues/23743)) ([ff0f7cf](https://github.com/gatsbyjs/gatsby/commit/ff0f7cf))
+- **gatsby-plugin-netlify:** Add missing space in error message
+  ([#23722](https://github.com/gatsbyjs/gatsby/issues/23722))
+  ([f6a48cf](https://github.com/gatsbyjs/gatsby/commit/f6a48cf))
+- **gatsby-plugin-netlify:** Fix heuristic for appending redirects
+  ([#23743](https://github.com/gatsbyjs/gatsby/issues/23743))
+  ([ff0f7cf](https://github.com/gatsbyjs/gatsby/commit/ff0f7cf))
 
 ## [2.3.0](https://github.com/gatsbyjs/gatsby/compare/gatsby-plugin-netlify@2.2.4...gatsby-plugin-netlify@2.3.0) (2020-04-27)
 
@@ -296,7 +317,8 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-- wrap ignore pattern in quotes ([#23176](https://github.com/gatsbyjs/gatsby/issues/23176)) ([7563db6](https://github.com/gatsbyjs/gatsby/commit/7563db6))
+- wrap ignore pattern in quotes ([#23176](https://github.com/gatsbyjs/gatsby/issues/23176))
+  ([7563db6](https://github.com/gatsbyjs/gatsby/commit/7563db6))
 
 ## [2.2.2](https://github.com/gatsbyjs/gatsby/compare/gatsby-plugin-netlify@2.2.1...gatsby-plugin-netlify@2.2.2) (2020-04-16)
 
@@ -310,7 +332,8 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
-- **gatsby:** bump node min version to 10.13.0 ([#22400](https://github.com/gatsbyjs/gatsby/issues/22400)) ([83d681a](https://github.com/gatsbyjs/gatsby/commit/83d681a))
+- **gatsby:** bump node min version to 10.13.0 ([#22400](https://github.com/gatsbyjs/gatsby/issues/22400))
+  ([83d681a](https://github.com/gatsbyjs/gatsby/commit/83d681a))
 
 ## [2.1.35](https://github.com/gatsbyjs/gatsby/compare/gatsby-plugin-netlify@2.1.34...gatsby-plugin-netlify@2.1.35) (2020-03-16)
 
@@ -324,7 +347,9 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-- **gatsby-plugin-netlify:** add page-data & app-data to preload list ([#21552](https://github.com/gatsbyjs/gatsby/issues/21552)) ([bf3fabd](https://github.com/gatsbyjs/gatsby/commit/bf3fabd))
+- **gatsby-plugin-netlify:** add page-data & app-data to preload list
+  ([#21552](https://github.com/gatsbyjs/gatsby/issues/21552))
+  ([bf3fabd](https://github.com/gatsbyjs/gatsby/commit/bf3fabd))
 
 ## [2.1.32](https://github.com/gatsbyjs/gatsby/compare/gatsby-plugin-netlify@2.1.31...gatsby-plugin-netlify@2.1.32) (2020-02-01)
 
@@ -366,13 +391,16 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-- **gatsby-plugin-netlify:** don't add `/undefined` in generated `_headers` file ([#18925](https://github.com/gatsbyjs/gatsby/issues/18925)) ([d83a5a2](https://github.com/gatsbyjs/gatsby/commit/d83a5a2))
+- **gatsby-plugin-netlify:** don't add `/undefined` in generated `_headers` file
+  ([#18925](https://github.com/gatsbyjs/gatsby/issues/18925))
+  ([d83a5a2](https://github.com/gatsbyjs/gatsby/commit/d83a5a2))
 
 ## [2.1.22](https://github.com/gatsbyjs/gatsby/compare/gatsby-plugin-netlify@2.1.21...gatsby-plugin-netlify@2.1.22) (2019-10-16)
 
 ### Bug Fixes
 
-- **gatsby-plugin-netlify:** cast `status` to string ([#18726](https://github.com/gatsbyjs/gatsby/issues/18726)) ([3c8623c](https://github.com/gatsbyjs/gatsby/commit/3c8623c))
+- **gatsby-plugin-netlify:** cast `status` to string ([#18726](https://github.com/gatsbyjs/gatsby/issues/18726))
+  ([3c8623c](https://github.com/gatsbyjs/gatsby/commit/3c8623c))
 
 ## [2.1.21](https://github.com/gatsbyjs/gatsby/compare/gatsby-plugin-netlify@2.1.20...gatsby-plugin-netlify@2.1.21) (2019-10-14)
 
@@ -386,13 +414,16 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-- **gatsby-plugin-netlify:** add warning instead for invalid he… ([#18326](https://github.com/gatsbyjs/gatsby/issues/18326)) ([24ccbfd](https://github.com/gatsbyjs/gatsby/commit/24ccbfd))
+- **gatsby-plugin-netlify:** add warning instead for invalid he…
+  ([#18326](https://github.com/gatsbyjs/gatsby/issues/18326))
+  ([24ccbfd](https://github.com/gatsbyjs/gatsby/commit/24ccbfd))
 
 ## [2.1.18](https://github.com/gatsbyjs/gatsby/compare/gatsby-plugin-netlify@2.1.17...gatsby-plugin-netlify@2.1.18) (2019-10-08)
 
 ### Bug Fixes
 
-- **gatsby-plugin-netlify:** fix merging of path headers ([#18203](https://github.com/gatsbyjs/gatsby/issues/18203)) ([5cbb741](https://github.com/gatsbyjs/gatsby/commit/5cbb741))
+- **gatsby-plugin-netlify:** fix merging of path headers ([#18203](https://github.com/gatsbyjs/gatsby/issues/18203))
+  ([5cbb741](https://github.com/gatsbyjs/gatsby/commit/5cbb741))
 
 ## [2.1.17](https://github.com/gatsbyjs/gatsby/compare/gatsby-plugin-netlify@2.1.15...gatsby-plugin-netlify@2.1.17) (2019-09-26)
 
@@ -414,7 +445,8 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-- **gatsby-plugin-netlify:** security headers merging ([#17538](https://github.com/gatsbyjs/gatsby/issues/17538)) ([8420626](https://github.com/gatsbyjs/gatsby/commit/8420626))
+- **gatsby-plugin-netlify:** security headers merging ([#17538](https://github.com/gatsbyjs/gatsby/issues/17538))
+  ([8420626](https://github.com/gatsbyjs/gatsby/commit/8420626))
 
 ## [2.1.12](https://github.com/gatsbyjs/gatsby/compare/gatsby-plugin-netlify@2.1.11...gatsby-plugin-netlify@2.1.12) (2019-09-09)
 
@@ -424,13 +456,16 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-- update minor updates in packages except react, babel and eslint ([#17254](https://github.com/gatsbyjs/gatsby/issues/17254)) ([252d867](https://github.com/gatsbyjs/gatsby/commit/252d867))
+- update minor updates in packages except react, babel and eslint
+  ([#17254](https://github.com/gatsbyjs/gatsby/issues/17254))
+  ([252d867](https://github.com/gatsbyjs/gatsby/commit/252d867))
 
 ## [2.1.10](https://github.com/gatsbyjs/gatsby/compare/gatsby-plugin-netlify@2.1.9...gatsby-plugin-netlify@2.1.10) (2019-08-24)
 
 ### Bug Fixes
 
-- update dependency fs-extra to v8 ([#17031](https://github.com/gatsbyjs/gatsby/issues/17031)) ([d891a19](https://github.com/gatsbyjs/gatsby/commit/d891a19))
+- update dependency fs-extra to v8 ([#17031](https://github.com/gatsbyjs/gatsby/issues/17031))
+  ([d891a19](https://github.com/gatsbyjs/gatsby/commit/d891a19))
 
 ## [2.1.9](https://github.com/gatsbyjs/gatsby/compare/gatsby-plugin-netlify@2.1.8...gatsby-plugin-netlify@2.1.9) (2019-08-23)
 
@@ -444,7 +479,8 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-- update dependency fs-extra to ^4.0.3 ([#16876](https://github.com/gatsbyjs/gatsby/issues/16876)) ([2cc762d](https://github.com/gatsbyjs/gatsby/commit/2cc762d))
+- update dependency fs-extra to ^4.0.3 ([#16876](https://github.com/gatsbyjs/gatsby/issues/16876))
+  ([2cc762d](https://github.com/gatsbyjs/gatsby/commit/2cc762d))
 
 ## [2.1.6](https://github.com/gatsbyjs/gatsby/compare/gatsby-plugin-netlify@2.1.5...gatsby-plugin-netlify@2.1.6) (2019-08-20)
 
@@ -466,7 +502,8 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-- correct links in package changelogs ([#15630](https://github.com/gatsbyjs/gatsby/issues/15630)) ([d07b9dd](https://github.com/gatsbyjs/gatsby/commit/d07b9dd))
+- correct links in package changelogs ([#15630](https://github.com/gatsbyjs/gatsby/issues/15630))
+  ([d07b9dd](https://github.com/gatsbyjs/gatsby/commit/d07b9dd))
 
 ## [2.1.1](https://github.com/gatsbyjs/gatsby/compare/gatsby-plugin-netlify@2.1.0...gatsby-plugin-netlify@2.1.1) (2019-07-11)
 
@@ -480,7 +517,9 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
-- **gatsby-plugin-netlify:** Add caching headers for immutable assets ([#14000](https://github.com/gatsbyjs/gatsby/issues/14000)) ([e5a4c3d](https://github.com/gatsbyjs/gatsby/commit/e5a4c3d))
+- **gatsby-plugin-netlify:** Add caching headers for immutable assets
+  ([#14000](https://github.com/gatsbyjs/gatsby/issues/14000))
+  ([e5a4c3d](https://github.com/gatsbyjs/gatsby/commit/e5a4c3d))
 
 ## [2.0.16](https://github.com/gatsbyjs/gatsby/compare/gatsby-plugin-netlify@2.0.15...gatsby-plugin-netlify@2.0.16) (2019-05-01)
 
@@ -490,13 +529,18 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-- **gatsby-plugin-netlify:** add all .js files from webpack.stats.json to \_headers ([#12521](https://github.com/gatsbyjs/gatsby/issues/12521)) ([983dbd9](https://github.com/gatsbyjs/gatsby/commit/983dbd9)), closes [#9828](https://github.com/gatsbyjs/gatsby/issues/9828)
+- **gatsby-plugin-netlify:** add all .js files from webpack.stats.json to \_headers
+  ([#12521](https://github.com/gatsbyjs/gatsby/issues/12521))
+  ([983dbd9](https://github.com/gatsbyjs/gatsby/commit/983dbd9)), closes
+  [#9828](https://github.com/gatsbyjs/gatsby/issues/9828)
 
 ## [2.0.14](https://github.com/gatsbyjs/gatsby/compare/gatsby-plugin-netlify@2.0.13...gatsby-plugin-netlify@2.0.14) (2019-04-18)
 
 ### Bug Fixes
 
-- **gatsby-plugin-netlify:** Add Referrer-Policy to security headers ([#13452](https://github.com/gatsbyjs/gatsby/issues/13452)) ([871923a](https://github.com/gatsbyjs/gatsby/commit/871923a))
+- **gatsby-plugin-netlify:** Add Referrer-Policy to security headers
+  ([#13452](https://github.com/gatsbyjs/gatsby/issues/13452))
+  ([871923a](https://github.com/gatsbyjs/gatsby/commit/871923a))
 
 ## [2.0.13](https://github.com/gatsbyjs/gatsby/compare/gatsby-plugin-netlify@2.0.12...gatsby-plugin-netlify@2.0.13) (2019-03-15)
 
@@ -518,7 +562,9 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
-- **gatsby-plugin-netlify:** Allow status codes in redirects ([#11255](https://github.com/gatsbyjs/gatsby/issues/11255)) ([#11484](https://github.com/gatsbyjs/gatsby/issues/11484)) ([024f6f4](https://github.com/gatsbyjs/gatsby/commit/024f6f4))
+- **gatsby-plugin-netlify:** Allow status codes in redirects ([#11255](https://github.com/gatsbyjs/gatsby/issues/11255))
+  ([#11484](https://github.com/gatsbyjs/gatsby/issues/11484))
+  ([024f6f4](https://github.com/gatsbyjs/gatsby/commit/024f6f4))
 
 ## [2.0.8](https://github.com/gatsbyjs/gatsby/compare/gatsby-plugin-netlify@2.0.7...gatsby-plugin-netlify@2.0.8) (2019-02-01)
 
@@ -540,7 +586,10 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-- **gatsby-plugin-netlify:** do not cache service worker file on Netlify ([#9680](https://github.com/gatsbyjs/gatsby/issues/9680)) ([9280fd7](https://github.com/gatsbyjs/gatsby/commit/9280fd7)), closes [/www.netlify.com/blog/2018/06/28/5-pro-tips-and-plugins-for-optimizing-your-gatsby---netlify-site/#4](https://github.com/gatsbyjs/gatsby/issues/4)
+- **gatsby-plugin-netlify:** do not cache service worker file on Netlify
+  ([#9680](https://github.com/gatsbyjs/gatsby/issues/9680))
+  ([9280fd7](https://github.com/gatsbyjs/gatsby/commit/9280fd7)), closes
+  [/www.netlify.com/blog/2018/06/28/5-pro-tips-and-plugins-for-optimizing-your-gatsby---netlify-site/#4](https://github.com/gatsbyjs/gatsby/issues/4)
 
 <a name="2.0.4"></a>
 
@@ -560,7 +609,8 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-- **gatsby-plugin-netlify:** Broken links updated ([#9286](https://github.com/gatsbyjs/gatsby/issues/9286)) ([21830b4](https://github.com/gatsbyjs/gatsby/commit/21830b4))
+- **gatsby-plugin-netlify:** Broken links updated ([#9286](https://github.com/gatsbyjs/gatsby/issues/9286))
+  ([21830b4](https://github.com/gatsbyjs/gatsby/commit/21830b4))
 
 <a name="2.0.1"></a>
 
@@ -568,7 +618,9 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
-- **gatsby-plugin-netlify:** add force option to createRedirect ([#8521](https://github.com/gatsbyjs/gatsby/issues/8521)) ([e1d354e](https://github.com/gatsbyjs/gatsby/commit/e1d354e))
+- **gatsby-plugin-netlify:** add force option to createRedirect
+  ([#8521](https://github.com/gatsbyjs/gatsby/issues/8521))
+  ([e1d354e](https://github.com/gatsbyjs/gatsby/commit/e1d354e))
 
 <a name="2.0.0"></a>
 
