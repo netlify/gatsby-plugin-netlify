@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 4.0.0 (2022-01-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* remove cache headers
+* remove cache headers
+
+### Features
+
+* remove cache headers ([9f88d08](https://www.github.com/netlify/gatsby-plugin-netlify/commit/9f88d0825abefcca6b5a7d7618ee6af476c49bf3))
+* remove cache headers ([0167e60](https://www.github.com/netlify/gatsby-plugin-netlify/commit/0167e605fce111ef9a727513e369796f72fbee29))
+
+
+### Bug Fixes
+
+* add page data rewrites ([dacf876](https://www.github.com/netlify/gatsby-plugin-netlify/commit/dacf8768aac62d5be25edf1558f768f253fea4f8))
+* **deps:** update dependency webpack-assets-manifest to v5.1.0 ([#60](https://www.github.com/netlify/gatsby-plugin-netlify/issues/60)) ([1ddd753](https://www.github.com/netlify/gatsby-plugin-netlify/commit/1ddd753ebe19cd9e6fd27d923ffc89bd650fc7ee))
+
+
+### Miscellaneous Chores
+
+* **deps:** update googlecloudplatform/release-please-action action to v3 ([#53](https://www.github.com/netlify/gatsby-plugin-netlify/issues/53)) ([4ab7222](https://www.github.com/netlify/gatsby-plugin-netlify/commit/4ab72227eed6ad0c67b8468dd4646d8237095246))
+* update readme ([#59](https://www.github.com/netlify/gatsby-plugin-netlify/issues/59)) ([140a71d](https://www.github.com/netlify/gatsby-plugin-netlify/commit/140a71dc001993bd09f9bc5e2f52ec19b1693c19))
+
 ## [3.13.0-next.0](https://github.com/gatsbyjs/gatsby/compare/gatsby-plugin-netlify@3.12.0-next.3...gatsby-plugin-netlify@3.13.0-next.0) (2021-08-12)
 
 **Note:** Version bump only for package gatsby-plugin-netlify
