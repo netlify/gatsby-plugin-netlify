@@ -1745,10 +1745,10 @@
   resolved "https://registry.yarnpkg.com/@microsoft/fetch-event-source/-/fetch-event-source-2.0.1.tgz#9ceecc94b49fbaa15666e38ae8587f64acce007d"
   integrity sha512-W6CLUJ2eBMw3Rec70qrsEW0jOm/3twwJv21mrmj2yORiaVmVYGS4sSS5yUwvQc1ZlDLYGPnClVWmUUMagKNsfA==
 
-"@netlify/eslint-config-node@^4.1.6":
-  version "4.1.6"
-  resolved "https://registry.yarnpkg.com/@netlify/eslint-config-node/-/eslint-config-node-4.1.6.tgz#b09973c2c76665bc6c97b83738152ec6d36c75d4"
-  integrity sha512-G/6bqpeR8jQj1cbEjFg8sdc23Wq4TUz/fD+XFup0EYEJbUnjriClsljgMUSnmnBNllyMy36T9YEXkam4HUKtJA==
+"@netlify/eslint-config-node@^4.1.7":
+  version "4.1.7"
+  resolved "https://registry.yarnpkg.com/@netlify/eslint-config-node/-/eslint-config-node-4.1.7.tgz#70e1993759df6b48986a62f8fa7d528fde795739"
+  integrity sha512-3XYVE0Wnr8YmSTls7447fT4Lyr5goFJ1kK/xevdLVdlzinxd1Wc6SK4um5hZAvl6nrURmgRfLBSIqdpDeRFIlg==
   dependencies:
     "@babel/core" "^7.13.8"
     "@babel/eslint-parser" "^7.13.8"
