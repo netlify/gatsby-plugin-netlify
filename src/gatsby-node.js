@@ -1,5 +1,8 @@
 // https://www.netlify.com/docs/headers-and-basic-auth/
 
+import { promises as fs } from 'fs'
+import { join } from 'path'
+
 import { generatePageDataPath } from 'gatsby-core-utils'
 import WebpackAssetsManifest from 'webpack-assets-manifest'
 
@@ -59,31 +62,39 @@ export const onPostBuild = async ({ store, pathPrefix, reporter }, userPluginOpt
   const pluginData = makePluginData(store, assetsManifest, pathPrefix)
   const pluginOptions = { ...DEFAULT_OPTIONS, ...userPluginOptions }
 
-  const { redirects, pages } = store.getState()
+  const { redirects, pages, functions = [], program } = store.getState()
   if (pages.size > PAGE_COUNT_WARN && (pluginOptions.mergeCachingHeaders || pluginOptions.mergeLinkHeaders)) {
     reporter.warn(
       `[gatsby-plugin-netlify] Your site has ${pages.size} pages, which means that the generated headers file could become very large. Consider disabling "mergeCachingHeaders" and "mergeLinkHeaders" in your plugin config`,
     )
   }
   reporter.info(`[gatsby-plugin-netlify] Creating SSR redirects...`)
+
   let count = 0
   const rewrites = []
+
+  let needsFunctions = functions.length !== 0
+
   ;[...pages.values()].forEach((page) => {
     const { mode, matchPath, path } = page
+    if (mode === 'SSR' || mode === 'DSG') {
+      needsFunctions = true
+    }
     if (mode === `SSR`) {
+      const fromPath = matchPath ?? path
       count++
       rewrites.push(
         {
-          fromPath: matchPath ?? path,
+          fromPath,
           toPath: `/.netlify/functions/__ssr`,
         },
         {
-          fromPath: generatePageDataPath(`/`, matchPath ?? path),
+          fromPath: generatePageDataPath(`/`, fromPath),
           toPath: `/.netlify/functions/__ssr`,
         },
       )
     }
-    if (pluginOptions.generateMatchPathRewrites && matchPath !== path) {
+    if (pluginOptions.generateMatchPathRewrites && matchPath && matchPath !== path) {
       rewrites.push({
         fromPath: matchPath,
         toPath: path,
@@ -91,6 +102,11 @@ export const onPostBuild = async ({ store, pathPrefix, reporter }, userPluginOpt
     }
   })
   reporter.info(`[gatsby-plugin-netlify] Created ${count} SSR redirect${count === 1 ? `` : `s`}...`)
+
+  if (!needsFunctions) {
+    reporter.info(`[gatsby-plugin-netlify] No Netlify functions needed. Skipping...`)
+    await fs.writeFile(join(program.directory, `.cache`, `.nf-skip-gatsby-functions`), '')
+  }
 
   await Promise.all([
     buildHeadersProgram(pluginData, pluginOptions, reporter),

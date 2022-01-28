@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.1.0](https://www.github.com/netlify/gatsby-plugin-netlify/compare/v4.0.0...v4.1.0) (2022-01-26)
+
+
+### Features
+
+* disable Netlify functions if not needed ([#65](https://www.github.com/netlify/gatsby-plugin-netlify/issues/65)) ([d4ed977](https://www.github.com/netlify/gatsby-plugin-netlify/commit/d4ed97755a57cb3b9185d00b087186197967a692))
+
 ## 4.0.0 (2022-01-19)
 
 Add support for Gatsby 4, including adding the rewrites required for DPR and SSR render modes.
