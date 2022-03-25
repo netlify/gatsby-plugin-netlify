@@ -68,7 +68,7 @@ export const onPostBuild = async ({ store, pathPrefix, reporter }, userPluginOpt
       `[gatsby-plugin-netlify] Your site has ${pages.size} pages, which means that the generated headers file could become very large. Consider disabling "mergeCachingHeaders" and "mergeLinkHeaders" in your plugin config`,
     )
   }
-  reporter.info(`[gatsby-plugin-netlify] Creating SSR redirects...`)
+  reporter.info(`[gatsby-plugin-netlify] Creating SSR/DSG redirects...`)
 
   let count = 0
   const rewrites = []
@@ -77,20 +77,19 @@ export const onPostBuild = async ({ store, pathPrefix, reporter }, userPluginOpt
 
   ;[...pages.values()].forEach((page) => {
     const { mode, matchPath, path } = page
-    if (mode === 'SSR' || mode === 'DSG') {
+    if (mode === `SSR` || mode === `DSG`) {
       needsFunctions = true
-    }
-    if (mode === `SSR`) {
       const fromPath = matchPath ?? path
+      const toPath = mode === `SSR` ? `/.netlify/functions/__ssr` : `/.netlify/functions/__dsg`
       count++
       rewrites.push(
         {
           fromPath,
-          toPath: `/.netlify/functions/__ssr`,
+          toPath,
         },
         {
           fromPath: generatePageDataPath(`/`, fromPath),
-          toPath: `/.netlify/functions/__ssr`,
+          toPath,
         },
       )
     }
@@ -101,11 +100,11 @@ export const onPostBuild = async ({ store, pathPrefix, reporter }, userPluginOpt
       })
     }
   })
-  reporter.info(`[gatsby-plugin-netlify] Created ${count} SSR redirect${count === 1 ? `` : `s`}...`)
+  reporter.info(`[gatsby-plugin-netlify] Created ${count} SSR/DSG redirect${count === 1 ? `` : `s`}...`)
 
   if (!needsFunctions) {
     reporter.info(`[gatsby-plugin-netlify] No Netlify functions needed. Skipping...`)
-    await fs.writeFile(join(program.directory, `.cache`, `.nf-skip-gatsby-functions`), '')
+    await fs.writeFile(join(program.directory, `.cache`, `.nf-skip-gatsby-functions`), ``)
   }
 
   await Promise.all([
