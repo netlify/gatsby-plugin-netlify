@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [4.1.1](https://www.github.com/netlify/gatsby-plugin-netlify/compare/v4.1.0...v4.1.1) (2022-03-28)
+
+
+### Bug Fixes
+
+* **deps:** update dependency fs-extra to v10.0.1 ([#86](https://www.github.com/netlify/gatsby-plugin-netlify/issues/86)) ([ea7e98e](https://www.github.com/netlify/gatsby-plugin-netlify/commit/ea7e98e7a916e6984b0a61b11b2222b7884ef832))
+
 ## [4.1.0](https://www.github.com/netlify/gatsby-plugin-netlify/compare/v4.0.0...v4.1.0) (2022-01-26)
 
 
