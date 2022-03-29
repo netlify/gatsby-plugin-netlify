@@ -12,7 +12,7 @@ jest.mock('../build-headers-program', () => {
     default: jest.fn(),
   }
 })
-jest.mock('../../node_modules/fs-extra', () => {
+jest.mock('fs-extra', () => {
   return {
     __esModule: true,
     default: jest.fn(),
