@@ -26,6 +26,7 @@
     "@babel/eslint-parser": "^7.16.5",
     "@babel/eslint-plugin": "^7.16.5",
     "@netlify/eslint-config-node": "^5.1.8",
+    "@types/jest": "^27.4.1",
     "babel-preset-gatsby-package": "^2.5.0",
     "cross-env": "^7.0.3",
     "gatsby": "^4.5.3",
@@ -51,7 +52,8 @@
     "url": "https://github.com/netlify/gatsby-plugin-netlify.git"
   },
   "scripts": {
-    "build": "babel src --out-dir . --ignore \"**/__tests__\"",
+    "build": "tsc && cd src/__tests__ && tsc",
+    "clean": "tsc --build --clean",
     "prepare": "cross-env NODE_ENV=production npm run build",
     "prepublishOnly": "npm run prepare",
     "format": "npm run format:code && npm run format:other",
@@ -60,7 +62,7 @@
     "lint": "eslint --ext .js,.jsx,.ts,.tsx .",
     "prettier": "prettier \"**/*.{md,css,scss,yaml,yml}\"",
     "test": "jest",
-    "watch": "babel -w src --out-dir . --ignore \"**/__tests__\""
+    "watch": "tsc --watch"
   },
   "engines": {
     "node": ">=12.13.0"

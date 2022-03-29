@@ -4,7 +4,6 @@ import { promises as fs } from 'fs'
 import { join } from 'path'
 
 import { generatePageDataPath } from 'gatsby-core-utils'
-// @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module 'webp... Remove this comment to see the full error message
 import WebpackAssetsManifest from 'webpack-assets-manifest'
 
 import buildHeadersProgram from './build-headers-program'

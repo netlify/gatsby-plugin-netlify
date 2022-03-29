@@ -2,7 +2,6 @@
 import { tmpdir } from 'os'
 import { join } from 'path'
 
-// @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module 'fs-e... Remove this comment to see the full error message
 import { existsSync, mkdtemp, readFile } from 'fs-extra'
 
 import buildHeadersProgram from '../build-headers-program'
@@ -176,29 +175,23 @@ const createPluginData = async () => {
   };
 }
 
-// @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'jest'.
 jest.mock(`fs-extra`, () => ({
   // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'jest'.
   ...jest.requireActual(`fs-extra`),
-  // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'jest'.
   existsSync: jest.fn(),
 }))
-// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 // eslint-disable-next-line max-lines-per-function
 describe(`build-headers-program`, () => {
   let reporter: any
 
-  // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'beforeEach'.
   beforeEach(() => {
     reporter = {
-      // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'jest'.
       panic: jest.fn(),
     }
     existsSync.mockClear()
     existsSync.mockReturnValue(true)
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it(`with caching headers`, async () => {
     const pluginData = await createPluginData()
 
@@ -209,28 +202,21 @@ describe(`build-headers-program`, () => {
 
     await buildHeadersProgram(pluginData, pluginOptions, reporter)
 
-    // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'expect'.
     expect(reporter.panic).not.toHaveBeenCalled()
     const output = await readFile(pluginData.publicFolder(`_headers`), `utf8`)
-    // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'expect'.
     expect(output).toMatchSnapshot()
-    // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'expect'.
     expect(output).toMatch(/app-data\.json/)
-    // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'expect'.
     expect(output).toMatch(/page-data\.json/)
     // we should only check page-data & app-data once which leads to 2 times
-    // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'expect'.
     expect(existsSync).toBeCalledTimes(2)
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it(`with manifest['pages-manifest']`, async () => {
     const pluginData = await createPluginData()
 
     existsSync.mockImplementation((path: any) => !path.includes(`page-data.json`) && !path.includes(`app-data.json`))
 
     // gatsby < 2.9 uses page-manifest
-    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
     pluginData.manifest[`pages-manifest`] = [`pages-manifest-ab11f09e0ca7ecd3b43e.js`]
 
     const pluginOptions = {
@@ -240,27 +226,19 @@ describe(`build-headers-program`, () => {
 
     await buildHeadersProgram(pluginData, pluginOptions, reporter)
 
-    // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'expect'.
     expect(reporter.panic).not.toHaveBeenCalled()
     const output = await readFile(pluginData.publicFolder(`_headers`), `utf8`)
-    // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'expect'.
     expect(output).toMatchSnapshot()
-    // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'expect'.
     expect(output).toMatch(/\/pages-manifest-ab11f09e0ca7ecd3b43e\.js/g)
-    // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'expect'.
     expect(output).not.toMatch(/\/app-data\.json/g)
-    // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'expect'.
     expect(output).not.toMatch(/\/page-data\.json/g)
-    // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'expect'.
     expect(output).not.toMatch(/\/undefined/g)
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it(`without app-data file`, async () => {
     const pluginData = await createPluginData()
 
     // gatsby 2.17.0+ adds an app-data file
-    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
     delete pluginData.manifest[`pages-manifest`]
 
     const pluginOptions = {
@@ -271,16 +249,12 @@ describe(`build-headers-program`, () => {
 
     await buildHeadersProgram(pluginData, pluginOptions, reporter)
 
-    // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'expect'.
     expect(reporter.panic).not.toHaveBeenCalled()
     const output = await readFile(pluginData.publicFolder(`_headers`), `utf8`)
-    // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'expect'.
     expect(output).not.toMatch(/app-data\.json/g)
-    // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'expect'.
     expect(output).not.toMatch(/\/undefined/g)
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it(`without caching headers`, async () => {
     const pluginData = await createPluginData()
 
@@ -291,13 +265,10 @@ describe(`build-headers-program`, () => {
 
     await buildHeadersProgram(pluginData, pluginOptions, reporter)
 
-    // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'expect'.
     expect(reporter.panic).not.toHaveBeenCalled()
-    // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'expect'.
     expect(await readFile(pluginData.publicFolder(`_headers`), `utf8`)).toMatchSnapshot()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it(`with security headers`, async () => {
     const pluginData = await createPluginData()
 
@@ -315,13 +286,10 @@ describe(`build-headers-program`, () => {
 
     await buildHeadersProgram(pluginData, pluginOptions, reporter)
 
-    // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'expect'.
     expect(reporter.panic).not.toHaveBeenCalled()
-    // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'expect'.
     expect(await readFile(pluginData.publicFolder(`_headers`), `utf8`)).toMatchSnapshot()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it(`with badly headers configuration`, async () => {
     const pluginData = await createPluginData()
 
@@ -335,7 +303,6 @@ describe(`build-headers-program`, () => {
 
     await buildHeadersProgram(pluginData, pluginOptions, reporter)
 
-    // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'expect'.
     expect(reporter.panic).toHaveBeenCalled()
   })
 })

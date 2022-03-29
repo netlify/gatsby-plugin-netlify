@@ -1,9 +1,7 @@
 /* eslint-disable max-lines */
 import { parse, posix } from 'path'
 
-// @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module 'fs-e... Remove this comment to see the full error message
 import { writeFile, existsSync } from 'fs-extra'
-// @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module 'keba... Remove this comment to see the full error message
 import kebabHash from 'kebab-hash'
 import _ from 'lodash'
 
@@ -121,7 +119,6 @@ const preloadHeadersByPage = ({
     }
 
     const pathKey = headersPath(pathPrefix, page.path)
-    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
     linksByPage[pathKey] = getLinkHeaders(filesByResourceType, pathPrefix)
   })
 
@@ -143,27 +140,21 @@ const headersMerge = (userHeaders: any, defaultHeaders: any) => {
   const merged = {}
   Object.keys(defaultHeaders).forEach((path) => {
     if (!userHeaders[path]) {
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       merged[path] = defaultHeaders[path]
       return
     }
     const headersMap = {}
     defaultHeaders[path].forEach((header: any) => {
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       headersMap[getHeaderName(header)] = header
     })
     userHeaders[path].forEach((header: any) => {
       // override if exists
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       headersMap[getHeaderName(header)] = header
     })
-    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
     merged[path] = Object.values(headersMap)
   })
   Object.keys(userHeaders).forEach((path) => {
-    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
     if (!merged[path]) {
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       merged[path] = userHeaders[path]
     }
   })
@@ -255,7 +246,6 @@ const mapUserLinkAllPageHeaders =
     const duplicateHeadersByPage = {}
     pages.forEach((page: any) => {
       const pathKey = headersPath(pathPrefix, page.path)
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       duplicateHeadersByPage[pathKey] = headersList
     })
 
@@ -320,7 +310,6 @@ const applyCachingHeaders =
 
     files.forEach((file) => {
       if (typeof file === `string`) {
-        // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
         cachingHeaders[`/${file}`] = [IMMUTABLE_CACHING_HEADER]
       }
     })

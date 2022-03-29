@@ -2,9 +2,7 @@ import { testPluginOptionsSchema } from "gatsby-plugin-utils"
 
 import { pluginOptionsSchema } from "../gatsby-node"
 
-// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe(`gatsby-node.js`, () => {
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it(`should provide meaningful errors when fields are invalid`, async () => {
     const expectedErrors = [
       `"headers" must be of type object`,
@@ -22,15 +20,13 @@ describe(`gatsby-node.js`, () => {
       mergeSecurityHeaders: `this should be a boolean`,
       mergeLinkHeaders: `this should be a boolean`,
       mergeCachingHeaders: `this should be a boolean`,
-      transformHeaders: (too: any, many: any, args: any) => ``,
+      transformHeaders: (too, many, args) => ``,
       generateMatchPathRewrites: `this should be a boolean`,
     })
 
-    // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'expect'.
     expect(errors).toEqual(expectedErrors)
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it(`should validate the schema`, async () => {
     const { isValid } = await testPluginOptionsSchema(pluginOptionsSchema, {
       headers: {
@@ -45,7 +41,6 @@ describe(`gatsby-node.js`, () => {
       generateMatchPathRewrites: false,
     })
 
-    // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'expect'.
     expect(isValid).toBe(true)
   })
 })
