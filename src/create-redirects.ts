@@ -1,9 +1,10 @@
+// @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module 'fs-e... Remove this comment to see the full error message
 import { existsSync, readFile, writeFile } from 'fs-extra'
 
 import { HEADER_COMMENT } from './constants'
 
 // eslint-disable-next-line max-statements
-export default async function writeRedirectsFile(pluginData, redirects, rewrites) {
+export default async function writeRedirectsFile(pluginData: any, redirects: any, rewrites: any) {
   const { publicFolder } = pluginData
 
   if (redirects.length === 0 && rewrites.length === 0) return null
@@ -22,7 +23,7 @@ export default async function writeRedirectsFile(pluginData, redirects, rewrites
   ])
 
   // Map redirect data to the format Netlify expects
-  redirects = redirects.map((redirect) => {
+  redirects = redirects.map((redirect: any) => {
     const { fromPath, isPermanent, redirectInBrowser, force, toPath, statusCode, ...rest } = redirect
 
     let status = isPermanent ? `301` : `302`
@@ -49,7 +50,10 @@ export default async function writeRedirectsFile(pluginData, redirects, rewrites
     return pieces.join(`  `)
   })
 
-  rewrites = rewrites.map(({ fromPath, toPath }) => `${fromPath}  ${toPath}  200`)
+  rewrites = rewrites.map(({
+    fromPath,
+    toPath
+  }: any) => `${fromPath}  ${toPath}  200`)
 
   let commentFound = false
 

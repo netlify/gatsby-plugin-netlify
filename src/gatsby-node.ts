@@ -4,6 +4,7 @@ import { promises as fs } from 'fs'
 import { join } from 'path'
 
 import { generatePageDataPath } from 'gatsby-core-utils'
+// @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module 'webp... Remove this comment to see the full error message
 import WebpackAssetsManifest from 'webpack-assets-manifest'
 
 import buildHeadersProgram from './build-headers-program'
@@ -14,7 +15,9 @@ import makePluginData from './plugin-data'
 const assetsManifest = {}
 
 /** @type {import("gatsby").GatsbyNode["pluginOptionsSchema"]} */
-export const pluginOptionsSchema = ({ Joi }) => {
+export const pluginOptionsSchema = ({
+  Joi
+}: any) => {
   const MATCH_ALL_KEYS = /^/
 
   // headers is a specific type used by Netlify: https://www.gatsbyjs.com/plugins/gatsby-plugin-netlify/#headers
@@ -42,7 +45,10 @@ export const pluginOptionsSchema = ({ Joi }) => {
 // Inject a webpack plugin to get the file manifests so we can translate all link headers
 /** @type {import("gatsby").GatsbyNode["onCreateWebpackConfig"]} */
 
-export const onCreateWebpackConfig = ({ actions, stage }) => {
+export const onCreateWebpackConfig = ({
+  actions,
+  stage
+}: any) => {
   if (stage !== BUILD_HTML_STAGE && stage !== BUILD_CSS_STAGE) {
     return
   }
@@ -58,7 +64,11 @@ export const onCreateWebpackConfig = ({ actions, stage }) => {
 }
 
 /** @type {import("gatsby").GatsbyNode["onPostBuild"]} */
-export const onPostBuild = async ({ store, pathPrefix, reporter }, userPluginOptions) => {
+export const onPostBuild = async ({
+  store,
+  pathPrefix,
+  reporter
+}: any, userPluginOptions: any) => {
   const pluginData = makePluginData(store, assetsManifest, pathPrefix)
   const pluginOptions = { ...DEFAULT_OPTIONS, ...userPluginOptions }
 
@@ -71,7 +81,7 @@ export const onPostBuild = async ({ store, pathPrefix, reporter }, userPluginOpt
   reporter.info(`[gatsby-plugin-netlify] Creating SSR/DSG redirects...`)
 
   let count = 0
-  const rewrites = []
+  const rewrites: any = []
 
   let needsFunctions = functions.length !== 0
 

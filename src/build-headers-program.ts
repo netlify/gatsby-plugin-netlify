@@ -1,7 +1,9 @@
 /* eslint-disable max-lines */
 import { parse, posix } from 'path'
 
+// @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module 'fs-e... Remove this comment to see the full error message
 import { writeFile, existsSync } from 'fs-extra'
+// @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module 'keba... Remove this comment to see the full error message
 import kebabHash from 'kebab-hash'
 import _ from 'lodash'
 
@@ -16,12 +18,12 @@ import {
   PAGE_DATA_DIR,
 } from './constants'
 
-const getHeaderName = (header) => {
+const getHeaderName = (header: any) => {
   const matches = header.match(/^([^:]+):/)
   return matches && matches[1]
 }
 
-const validHeaders = (headers, reporter) => {
+const validHeaders = (headers: any, reporter: any) => {
   if (!headers || !_.isObject(headers)) {
     return false
   }
@@ -40,20 +42,20 @@ const validHeaders = (headers, reporter) => {
   )
 }
 
-const linkTemplate = (assetPath, type = `script`) =>
+const linkTemplate = (assetPath: any, type = `script`) =>
   `Link: <${assetPath}>; rel=preload; as=${type}${type === `fetch` ? `; crossorigin` : ``}`
 
-const pathChunkName = (path) => {
+const pathChunkName = (path: any) => {
   const name = path === `/` ? `index` : kebabHash(path)
   return `path---${name}`
 }
 
-const getPageDataPath = (path) => {
+const getPageDataPath = (path: any) => {
   const fixedPagePath = path === `/` ? `index` : path
   return posix.join(`page-data`, fixedPagePath, `page-data.json`)
 }
 
-const getScriptPath = (file, manifest) => {
+const getScriptPath = (file: any, manifest: any) => {
   const chunk = manifest[file]
 
   if (!chunk) {
@@ -71,14 +73,20 @@ const getScriptPath = (file, manifest) => {
   })
 }
 
-const getLinkHeaders = (filesByType, pathPrefix) =>
+const getLinkHeaders = (filesByType: any, pathPrefix: any) =>
   Object.entries(filesByType).flatMap(([type, files]) =>
-    files.map((file) => linkTemplate(`${pathPrefix}/${file}`, type)),
+    // @ts-expect-error ts-migrate(2571) FIXME: Object is of type 'unknown'.
+    files.map((file: any) => linkTemplate(`${pathPrefix}/${file}`, type)),
   )
 
-const headersPath = (pathPrefix, path) => `${pathPrefix}${path}`
+const headersPath = (pathPrefix: any, path: any) => `${pathPrefix}${path}`
 
-const preloadHeadersByPage = ({ pages, manifest, pathPrefix, publicFolder }) => {
+const preloadHeadersByPage = ({
+  pages,
+  manifest,
+  pathPrefix,
+  publicFolder
+}: any) => {
   const linksByPage = {}
 
   const appDataPath = publicFolder(PAGE_DATA_DIR, `app-data.json`)
@@ -91,7 +99,7 @@ const preloadHeadersByPage = ({ pages, manifest, pathPrefix, publicFolder }) => 
     hasPageData = existsSync(pageDataPath)
   }
 
-  pages.forEach((page) => {
+  pages.forEach((page: any) => {
     const scripts = _.flatMap(COMMON_BUNDLES, (file) => getScriptPath(file, manifest))
     scripts.push(
       ...getScriptPath(pathChunkName(page.path), manifest),
@@ -113,14 +121,15 @@ const preloadHeadersByPage = ({ pages, manifest, pathPrefix, publicFolder }) => 
     }
 
     const pathKey = headersPath(pathPrefix, page.path)
+    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
     linksByPage[pathKey] = getLinkHeaders(filesByResourceType, pathPrefix)
   })
 
   return linksByPage
 }
 
-const defaultMerge = (...headers) => {
-  const unionMerge = (objValue, srcValue) => {
+const defaultMerge = (...headers: any[]) => {
+  const unionMerge = (objValue: any, srcValue: any) => {
     if (Array.isArray(objValue)) {
       return _.union(objValue, srcValue)
     }
@@ -130,59 +139,64 @@ const defaultMerge = (...headers) => {
   return _.mergeWith({}, ...headers, unionMerge)
 }
 
-const headersMerge = (userHeaders, defaultHeaders) => {
+const headersMerge = (userHeaders: any, defaultHeaders: any) => {
   const merged = {}
   Object.keys(defaultHeaders).forEach((path) => {
     if (!userHeaders[path]) {
+      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       merged[path] = defaultHeaders[path]
       return
     }
     const headersMap = {}
-    defaultHeaders[path].forEach((header) => {
+    defaultHeaders[path].forEach((header: any) => {
+      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       headersMap[getHeaderName(header)] = header
     })
-    userHeaders[path].forEach((header) => {
+    userHeaders[path].forEach((header: any) => {
       // override if exists
+      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       headersMap[getHeaderName(header)] = header
     })
+    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
     merged[path] = Object.values(headersMap)
   })
   Object.keys(userHeaders).forEach((path) => {
+    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
     if (!merged[path]) {
+      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       merged[path] = userHeaders[path]
     }
   })
   return merged
 }
 
-const transformLink = (manifest, publicFolder, pathPrefix) => (header) =>
-  header.replace(LINK_REGEX, (__, prefix, file, suffix) => {
-    const hashed = manifest[file]
-    if (hashed) {
-      return `${prefix}${pathPrefix}${hashed}${suffix}`
-    }
-    if (existsSync(publicFolder(file))) {
-      return `${prefix}${pathPrefix}${file}${suffix}`
-    }
-    throw new Error(
-      `Could not find the file specified in the Link header \`${header}\`.` +
-        `The gatsby-plugin-netlify is looking for a matching file (with or without a ` +
-        `webpack hash). Check the public folder and your gatsby-config.js to ensure you are ` +
-        `pointing to a public file.`,
-    )
-  })
+const transformLink = (manifest: any, publicFolder: any, pathPrefix: any) => (header: any) => header.replace(LINK_REGEX, (__: any, prefix: any, file: any, suffix: any) => {
+  const hashed = manifest[file]
+  if (hashed) {
+    return `${prefix}${pathPrefix}${hashed}${suffix}`
+  }
+  if (existsSync(publicFolder(file))) {
+    return `${prefix}${pathPrefix}${file}${suffix}`
+  }
+  throw new Error(
+    `Could not find the file specified in the Link header \`${header}\`.` +
+      `The gatsby-plugin-netlify is looking for a matching file (with or without a ` +
+      `webpack hash). Check the public folder and your gatsby-config.js to ensure you are ` +
+      `pointing to a public file.`,
+  )
+})
 
 // Writes out headers file format, with two spaces for indentation
 // https://www.netlify.com/docs/headers-and-basic-auth/
-const stringifyHeaders = (headers) =>
-  Object.entries(headers).reduce((text, [path, headerList]) => {
-    const headersString = headerList.reduce((accum, header) => `${accum}  ${header}\n`, ``)
-    return `${text}${path}\n${headersString}`
-  }, ``)
+const stringifyHeaders = (headers: any) => Object.entries(headers).reduce((text, [path, headerList]) => {
+  // @ts-expect-error ts-migrate(2571) FIXME: Object is of type 'unknown'.
+  const headersString = headerList.reduce((accum: any, header: any) => `${accum}  ${header}\n`, ``)
+  return `${text}${path}\n${headersString}`
+}, ``)
 
 // program methods
 
-const validateUserOptions = (pluginOptions, reporter) => (headers) => {
+const validateUserOptions = (pluginOptions: any, reporter: any) => (headers: any) => {
   if (!validHeaders(headers, reporter)) {
     throw new Error(
       `The "headers" option to gatsby-plugin-netlify is in the wrong shape. ` +
@@ -192,7 +206,7 @@ const validateUserOptions = (pluginOptions, reporter) => (headers) => {
     )
   }
 
-  ;[`mergeSecurityHeaders`, `mergeLinkHeaders`, `mergeCachingHeaders`].forEach((mergeOption) => {
+  [`mergeSecurityHeaders`, `mergeLinkHeaders`, `mergeCachingHeaders`].forEach((mergeOption) => {
     if (!_.isBoolean(pluginOptions[mergeOption])) {
       throw new TypeError(
         `The "${mergeOption}" option to gatsby-plugin-netlify must be a boolean. Check your gatsby-config.js.`,
@@ -212,18 +226,24 @@ const validateUserOptions = (pluginOptions, reporter) => (headers) => {
 }
 
 const mapUserLinkHeaders =
-  ({ manifest, pathPrefix, publicFolder }) =>
-  (headers) =>
-    Object.fromEntries(
-      Object.entries(headers).map(([path, headerList]) => [
-        path,
-        headerList.map(transformLink(manifest, publicFolder, pathPrefix)),
-      ]),
-    )
+  ({
+    manifest,
+    pathPrefix,
+    publicFolder
+  }: any) =>
+  (headers: any) => Object.fromEntries(
+    Object.entries(headers).map(([path, headerList]) => [
+      path,
+      // @ts-expect-error ts-migrate(2571) FIXME: Object is of type 'unknown'.
+      headerList.map(transformLink(manifest, publicFolder, pathPrefix)),
+    ]),
+  )
 
 const mapUserLinkAllPageHeaders =
-  (pluginData, { allPageHeaders }) =>
-  (headers) => {
+  (pluginData: any, {
+    allPageHeaders
+  }: any) =>
+  (headers: any) => {
     if (!allPageHeaders) {
       return headers
     }
@@ -233,8 +253,9 @@ const mapUserLinkAllPageHeaders =
     const headersList = allPageHeaders.map(transformLink(manifest, publicFolder, pathPrefix))
 
     const duplicateHeadersByPage = {}
-    pages.forEach((page) => {
+    pages.forEach((page: any) => {
       const pathKey = headersPath(pathPrefix, page.path)
+      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       duplicateHeadersByPage[pathKey] = headersList
     })
 
@@ -242,8 +263,10 @@ const mapUserLinkAllPageHeaders =
   }
 
 const applyLinkHeaders =
-  (pluginData, { mergeLinkHeaders }) =>
-  (headers) => {
+  (pluginData: any, {
+    mergeLinkHeaders
+  }: any) =>
+  (headers: any) => {
     if (!mergeLinkHeaders) {
       return headers
     }
@@ -260,8 +283,10 @@ const applyLinkHeaders =
   }
 
 const applySecurityHeaders =
-  ({ mergeSecurityHeaders }) =>
-  (headers) => {
+  ({
+    mergeSecurityHeaders
+  }: any) =>
+  (headers: any) => {
     if (!mergeSecurityHeaders) {
       return headers
     }
@@ -270,8 +295,10 @@ const applySecurityHeaders =
   }
 
 const applyCachingHeaders =
-  (pluginData, { mergeCachingHeaders }) =>
-  (headers) => {
+  (pluginData: any, {
+    mergeCachingHeaders
+  }: any) =>
+  (headers: any) => {
     if (!mergeCachingHeaders) {
       return headers
     }
@@ -293,6 +320,7 @@ const applyCachingHeaders =
 
     files.forEach((file) => {
       if (typeof file === `string`) {
+        // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
         cachingHeaders[`/${file}`] = [IMMUTABLE_CACHING_HEADER]
       }
     })
@@ -301,18 +329,20 @@ const applyCachingHeaders =
   }
 
 const applyTransfromHeaders =
-  ({ transformHeaders }) =>
-  (headers) =>
-    _.mapValues(headers, transformHeaders)
+  ({
+    transformHeaders
+  }: any) =>
+  (headers: any) => _.mapValues(headers, transformHeaders)
 
-const transformToString = (headers) => `${HEADER_COMMENT}\n\n${stringifyHeaders(headers)}`
+const transformToString = (headers: any) => `${HEADER_COMMENT}\n\n${stringifyHeaders(headers)}`
 
 const writeHeadersFile =
-  ({ publicFolder }) =>
-  (contents) =>
-    writeFile(publicFolder(NETLIFY_HEADERS_FILENAME), contents)
+  ({
+    publicFolder
+  }: any) =>
+  (contents: any) => writeFile(publicFolder(NETLIFY_HEADERS_FILENAME), contents)
 
-const buildHeadersProgram = (pluginData, pluginOptions, reporter) =>
+const buildHeadersProgram = (pluginData: any, pluginOptions: any, reporter: any) =>
   _.flow(
     validateUserOptions(pluginOptions, reporter),
     mapUserLinkHeaders(pluginData),
