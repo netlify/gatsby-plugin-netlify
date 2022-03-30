@@ -172,14 +172,16 @@ const createPluginData = async () => {
     },
     pathPrefix: ``,
     publicFolder: (...files: any[]) => join(tmpDir, ...files),
-  };
+  }
 }
 
-jest.mock(`fs-extra`, () => ({
-  // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'jest'.
-  ...jest.requireActual(`fs-extra`),
-  existsSync: jest.fn(),
-}))
+jest.mock(`fs-extra`, () => {
+  const actualFsExtra = jest.requireActual(`fs-extra`)
+  return {
+    ...actualFsExtra,
+    existsSync: jest.fn(),
+  }
+})
 // eslint-disable-next-line max-lines-per-function
 describe(`build-headers-program`, () => {
   let reporter: any

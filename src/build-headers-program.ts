@@ -72,9 +72,8 @@ const getScriptPath = (file: any, manifest: any) => {
 }
 
 const getLinkHeaders = (filesByType: any, pathPrefix: any) =>
-  Object.entries(filesByType).flatMap(([type, files]) =>
-    // @ts-expect-error ts-migrate(2571) FIXME: Object is of type 'unknown'.
-    files.map((file: any) => linkTemplate(`${pathPrefix}/${file}`, type)),
+  Object.entries(filesByType).flatMap(([type, files]: [string, Array<string>]) =>
+    files.map((file) => linkTemplate(`${pathPrefix}/${file}`, type)),
   )
 
 const headersPath = (pathPrefix: any, path: any) => `${pathPrefix}${path}`
@@ -179,9 +178,8 @@ const transformLink = (manifest: any, publicFolder: any, pathPrefix: any) => (he
 
 // Writes out headers file format, with two spaces for indentation
 // https://www.netlify.com/docs/headers-and-basic-auth/
-const stringifyHeaders = (headers: any) => Object.entries(headers).reduce((text, [path, headerList]) => {
-  // @ts-expect-error ts-migrate(2571) FIXME: Object is of type 'unknown'.
-  const headersString = headerList.reduce((accum: any, header: any) => `${accum}  ${header}\n`, ``)
+const stringifyHeaders = (headers: any) => Object.entries(headers).reduce((text, [path, headerList]: [string, Array<string>]) => {
+  const headersString = headerList.reduce((accum, header) => `${accum}  ${header}\n`, ``)
   return `${text}${path}\n${headersString}`
 }, ``)
 
@@ -223,9 +221,8 @@ const mapUserLinkHeaders =
     publicFolder
   }: any) =>
   (headers: any) => Object.fromEntries(
-    Object.entries(headers).map(([path, headerList]) => [
+    Object.entries(headers).map(([path, headerList]: [string, Array<string>]) => [
       path,
-      // @ts-expect-error ts-migrate(2571) FIXME: Object is of type 'unknown'.
       headerList.map(transformLink(manifest, publicFolder, pathPrefix)),
     ]),
   )
