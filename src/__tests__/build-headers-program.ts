@@ -171,17 +171,20 @@ const createPluginData = async () => {
       ],
     },
     pathPrefix: ``,
-    publicFolder: (...files) => join(tmpDir, ...files),
+    publicFolder: (...files: any[]) => join(tmpDir, ...files),
   }
 }
 
-jest.mock(`fs-extra`, () => ({
-  ...jest.requireActual(`fs-extra`),
-  existsSync: jest.fn(),
-}))
+jest.mock(`fs-extra`, () => {
+  const actualFsExtra = jest.requireActual(`fs-extra`)
+  return {
+    ...actualFsExtra,
+    existsSync: jest.fn(),
+  }
+})
 // eslint-disable-next-line max-lines-per-function
 describe(`build-headers-program`, () => {
-  let reporter
+  let reporter: any
 
   beforeEach(() => {
     reporter = {
@@ -213,7 +216,7 @@ describe(`build-headers-program`, () => {
   it(`with manifest['pages-manifest']`, async () => {
     const pluginData = await createPluginData()
 
-    existsSync.mockImplementation((path) => !path.includes(`page-data.json`) && !path.includes(`app-data.json`))
+    existsSync.mockImplementation((path: any) => !path.includes(`page-data.json`) && !path.includes(`app-data.json`))
 
     // gatsby < 2.9 uses page-manifest
     pluginData.manifest[`pages-manifest`] = [`pages-manifest-ab11f09e0ca7ecd3b43e.js`]
@@ -244,7 +247,7 @@ describe(`build-headers-program`, () => {
       ...DEFAULT_OPTIONS,
       mergeCachingHeaders: true,
     }
-    existsSync.mockImplementation((path) => !path.includes(`app-data.json`))
+    existsSync.mockImplementation((path: any) => !path.includes(`app-data.json`))
 
     await buildHeadersProgram(pluginData, pluginOptions, reporter)
 
