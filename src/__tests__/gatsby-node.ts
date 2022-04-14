@@ -1,30 +1,26 @@
-jest.mock('../plugin-data', () => {
-  return {
-    __esModule: true,
-    default: jest.fn().mockReturnValue({
-      publicFolder: jest.fn().mockReturnValue('mock-file-path'),
-    }),
-  }
-})
-jest.mock('../build-headers-program', () => {
-  return {
-    __esModule: true,
-    default: jest.fn(),
-  }
-})
-jest.mock('fs-extra', () => {
-  return {
-    __esModule: true,
-    default: jest.fn(),
-    existsSync: jest.fn(),
-    readFile: jest.fn(),
-    writeFile: jest.fn(),
-  }
-})
+/* eslint-disable import/first, max-nested-callbacks */
+jest.mock('../plugin-data', () => ({
+  __esModule: true,
+  default: jest.fn().mockReturnValue({
+    publicFolder: jest.fn().mockReturnValue('mock-file-path'),
+  }),
+}))
+jest.mock('../build-headers-program', () => ({
+  __esModule: true,
+  default: jest.fn(),
+}))
+jest.mock('fs-extra', () => ({
+  __esModule: true,
+  default: jest.fn(),
+  existsSync: jest.fn(),
+  readFile: jest.fn(),
+  writeFile: jest.fn(),
+}))
 
 // Importing writeFile here gives us access to the mocked method to assert the correct content is written to the file within test cases
 import { writeFile } from 'fs-extra'
 import { testPluginOptionsSchema } from 'gatsby-plugin-utils'
+
 import { pluginOptionsSchema, onPostBuild } from '../gatsby-node'
 
 describe(`gatsby-node.js`, () => {
@@ -46,7 +42,7 @@ describe(`gatsby-node.js`, () => {
         mergeSecurityHeaders: `this should be a boolean`,
         mergeLinkHeaders: `this should be a boolean`,
         mergeCachingHeaders: `this should be a boolean`,
-        transformHeaders: (too, many, args) => ``,
+        transformHeaders: (too, many, args) => [too, many, args],
         generateMatchPathRewrites: `this should be a boolean`,
       })
 
@@ -115,3 +111,4 @@ describe(`gatsby-node.js`, () => {
     })
   })
 })
+/* eslint-enable import/first, max-nested-callbacks */

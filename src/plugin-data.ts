@@ -1,15 +1,17 @@
-import path from "path"
+import path from 'path'
 
-export function buildPrefixer(prefix: any, ...paths: any[]) {
-  return (...subpaths: any[]) => path.join(prefix, ...paths, ...subpaths);
-}
+const buildPrefixer =
+  (prefix: any, ...paths: any[]) =>
+  (...subpaths: any[]) =>
+    path.join(prefix, ...paths, ...subpaths)
 
 // This function assembles data across the manifests and store to match a similar
 // shape of `static-entry.js`. With it, we can build headers that point to the correct
 // hashed filenames and ensure we pull in the componentChunkName.
-export default function makePluginData(store: any, assetsManifest: any, pathPrefix: any) {
+const makePluginData = (store: any, assetsManifest: any, pathPrefix: any) => {
   const { program, pages, components } = store.getState()
   const publicFolder = buildPrefixer(program.directory, `public`)
+  // eslint-disable-next-line node/global-require, import/no-dynamic-require, @typescript-eslint/no-var-requires
   const stats = require(publicFolder(`webpack.stats.json`))
   // Get all the files, not just the first
   const chunkManifest = stats.assetsByChunkName
@@ -25,3 +27,5 @@ export default function makePluginData(store: any, assetsManifest: any, pathPref
     publicFolder,
   }
 }
+
+export { makePluginData as default, buildPrefixer }
