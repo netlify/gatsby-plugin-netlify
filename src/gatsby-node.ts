@@ -1,8 +1,7 @@
 // https://www.netlify.com/docs/headers-and-basic-auth/
-
-import { promises as fs } from 'fs'
 import { join } from 'path'
 
+import { writeFile } from 'fs-extra'
 import { generatePageDataPath } from 'gatsby-core-utils'
 import WebpackAssetsManifest from 'webpack-assets-manifest'
 
@@ -14,9 +13,7 @@ import makePluginData from './plugin-data'
 const assetsManifest = {}
 
 /** @type {import("gatsby").GatsbyNode["pluginOptionsSchema"]} */
-export const pluginOptionsSchema = ({
-  Joi
-}: any) => {
+export const pluginOptionsSchema = ({ Joi }: any) => {
   const MATCH_ALL_KEYS = /^/
 
   // headers is a specific type used by Netlify: https://www.gatsbyjs.com/plugins/gatsby-plugin-netlify/#headers
@@ -44,10 +41,7 @@ export const pluginOptionsSchema = ({
 // Inject a webpack plugin to get the file manifests so we can translate all link headers
 /** @type {import("gatsby").GatsbyNode["onCreateWebpackConfig"]} */
 
-export const onCreateWebpackConfig = ({
-  actions,
-  stage
-}: any) => {
+export const onCreateWebpackConfig = ({ actions, stage }: any) => {
   if (stage !== BUILD_HTML_STAGE && stage !== BUILD_CSS_STAGE) {
     return
   }
@@ -63,11 +57,7 @@ export const onCreateWebpackConfig = ({
 }
 
 /** @type {import("gatsby").GatsbyNode["onPostBuild"]} */
-export const onPostBuild = async ({
-  store,
-  pathPrefix,
-  reporter
-}: any, userPluginOptions: any) => {
+export const onPostBuild = async ({ store, pathPrefix, reporter }: any, userPluginOptions: any) => {
   const pluginData = makePluginData(store, assetsManifest, pathPrefix)
   const pluginOptions = { ...DEFAULT_OPTIONS, ...userPluginOptions }
 
@@ -113,7 +103,7 @@ export const onPostBuild = async ({
 
   if (!needsFunctions) {
     reporter.info(`[gatsby-plugin-netlify] No Netlify functions needed. Skipping...`)
-    await fs.writeFile(join(program.directory, `.cache`, `.nf-skip-gatsby-functions`), ``)
+    await writeFile(join(program.directory, `.cache`, `.nf-skip-gatsby-functions`), ``)
   }
 
   await Promise.all([

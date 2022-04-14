@@ -1,4 +1,3 @@
-/* eslint-disable import/first, max-nested-callbacks */
 jest.mock('../plugin-data', () => ({
   __esModule: true,
   default: jest.fn().mockReturnValue({
@@ -111,4 +110,3 @@ describe(`gatsby-node.js`, () => {
     })
   })
 })
-/* eslint-enable import/first, max-nested-callbacks */
