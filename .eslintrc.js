@@ -24,4 +24,14 @@ module.exports = {
   env: {
     jest: true,
   },
+  overrides: [
+    {
+      // Tests use lots of nested callbacks
+      files: ['**/__tests__/*.ts'],
+      rules: {
+        'max-nested-callbacks': 'off',
+        'import/first': 'off',
+      },
+    },
+  ],
 }
