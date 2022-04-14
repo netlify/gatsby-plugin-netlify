@@ -1,4 +1,6 @@
+const rules = require('@netlify/eslint-config-node/.prettierrc.json')
+
 module.exports = {
-  ...require("@netlify/eslint-config-node/.prettierrc.json"),
-  endOfLine: "auto",
+  ...rules,
+  endOfLine: 'auto',
 }

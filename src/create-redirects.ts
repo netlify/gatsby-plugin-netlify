@@ -38,9 +38,7 @@ export default async function writeRedirectsFile(pluginData: any, redirects: any
       const value = rest[key]
 
       if (typeof value === `string` && value.includes(` `)) {
-        console.warn(
-          `Invalid redirect value "${value}" specified for key "${key}". ` + `Values should not contain spaces.`,
-        )
+        console.warn(`Invalid redirect value "${value}" specified for key "${key}". Values should not contain spaces.`)
       } else if (NETLIFY_REDIRECT_KEYWORDS_ALLOWLIST.has(key)) {
         pieces.push(`${key}=${value}`)
       }
@@ -49,10 +47,7 @@ export default async function writeRedirectsFile(pluginData: any, redirects: any
     return pieces.join(`  `)
   })
 
-  rewrites = rewrites.map(({
-    fromPath,
-    toPath
-  }: any) => `${fromPath}  ${toPath}  200`)
+  rewrites = rewrites.map(({ fromPath, toPath }: any) => `${fromPath}  ${toPath}  200`)
 
   let commentFound = false
 
