@@ -3,14 +3,10 @@ import { existsSync, readFile, writeFile } from 'fs-extra'
 import { HEADER_COMMENT } from './constants'
 
 const toNetlifyPath = (fromPath: string, toPath: string): Array<string> => {
-  let netlifyFromPath = fromPath
-  let netlifyToPath = toPath
-
-  // Wildcard & splat redirects
-  if (fromPath.includes('*')) {
-    netlifyFromPath = fromPath
-    netlifyToPath = toPath.replace(/\*/, ':splat')
-  }
+ // Modifies query parameter redirects, having no effect on other fromPath strings
+ const netlifyFromPath = fromPath.replace(/[&?]/, ' ')
+ // Modifies wildcard & splat redirects, having no effect on other toPath strings
+ const netlifyToPath = toPath.replace(/\*/, ':splat')
 
   return [
     netlifyFromPath,
