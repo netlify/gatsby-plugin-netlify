@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.3.0](https://www.github.com/netlify/gatsby-plugin-netlify/compare/v4.2.0...v4.3.0) (2022-04-20)
+
+
+### Features
+
+* Add support for advanced redirect types ([#117](https://www.github.com/netlify/gatsby-plugin-netlify/issues/117)) ([d547a28](https://www.github.com/netlify/gatsby-plugin-netlify/commit/d547a28dfdd193c0cf38b26b9c24e4fb2c5c3fee))
+
 ## [4.2.0](https://www.github.com/netlify/gatsby-plugin-netlify/compare/v4.1.0...v4.2.0) (2022-04-04)
 
 
