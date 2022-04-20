@@ -17,11 +17,15 @@ export default async function writeRedirectsFile(pluginData: any, redirects: any
     `headers`,
     `signed`,
     `edge_handler`,
-    `Language`,
-    `Country`,
+  ])
+
+  const NETLIFY_CONDITIONS_ALLOWLIST = new Set([
+    `language`,
+    `country`,
   ])
 
   // Map redirect data to the format Netlify expects
+  // eslint-disable-next-line max-statements
   redirects = redirects.map((redirect: any) => {
     const { fromPath, isPermanent, redirectInBrowser, force, toPath, statusCode, ...rest } = redirect
 
@@ -39,6 +43,19 @@ export default async function writeRedirectsFile(pluginData: any, redirects: any
 
       if (typeof value === `string` && value.includes(` `)) {
         console.warn(`Invalid redirect value "${value}" specified for key "${key}". Values should not contain spaces.`)
+      } else if (key === 'conditions') {
+        // "conditions" key from Gatsby contains only "language" and "country"
+        // which need special transformation to match Netlify _redirects
+        // https://www.gatsbyjs.com/docs/reference/config-files/actions/#createRedirect
+
+        for (const conditionKey in value) {
+          if (NETLIFY_CONDITIONS_ALLOWLIST.has(conditionKey)) {
+            const conditionValue = Array.isArray(value[conditionKey]) ? value[conditionKey].join(',') : value[conditionKey]
+            // Gatsby gives us "country", we want "Country"
+            const conditionName = conditionKey.charAt(0).toUpperCase() + conditionKey.slice(1)
+            pieces.push(`${conditionName}=${conditionValue}`)
+          }
+        }
       } else if (NETLIFY_REDIRECT_KEYWORDS_ALLOWLIST.has(key)) {
         pieces.push(`${key}=${value}`)
       }
