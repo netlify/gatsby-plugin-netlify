@@ -61,7 +61,8 @@
     "format:other": "npm run prettier -- --write",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx .",
     "prettier": "prettier \"**/*.{md,css,scss,yaml,yml}\"",
-    "test": "jest",
+    "test": "run-s test:jest lint",
+    "test:jest": "jest",
     "watch": "tsc --watch"
   },
   "engines": {
