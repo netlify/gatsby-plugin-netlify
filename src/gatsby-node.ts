@@ -91,8 +91,7 @@ export const onPostBuild = async ({ store, pathPrefix, reporter }: any, userPlug
           toPath,
         },
       )
-    }
-    if (pluginOptions.generateMatchPathRewrites && matchPath && matchPath !== path) {
+    } else if (pluginOptions.generateMatchPathRewrites && matchPath && matchPath !== path) {
       rewrites.push({
         fromPath: matchPath.replace(/\*.*/, '*'),
         toPath: path,
