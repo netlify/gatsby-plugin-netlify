@@ -76,9 +76,12 @@ export const onPostBuild = async ({ store, pathPrefix, reporter }: any, userPlug
 
   ;[...pages.values()].forEach((page) => {
     const { mode, matchPath, path } = page
+    const matchPathClean = matchPath && matchPath.replace(/\*.*/, '*')
+    const matchPathIsNotPath = matchPath && matchPath !== path
+
     if (mode === `SSR` || mode === `DSG`) {
       needsFunctions = true
-      const fromPath = matchPath.replace(/\*.*/, '*') ?? path
+      const fromPath = matchPathClean ?? path
       const toPath = mode === `SSR` ? `/.netlify/functions/__ssr` : `/.netlify/functions/__dsg`
       count++
       rewrites.push(
@@ -91,9 +94,9 @@ export const onPostBuild = async ({ store, pathPrefix, reporter }: any, userPlug
           toPath,
         },
       )
-    } else if (pluginOptions.generateMatchPathRewrites && matchPath && matchPath !== path) {
+    } else if (pluginOptions.generateMatchPathRewrites && matchPathIsNotPath) {
       rewrites.push({
-        fromPath: matchPath.replace(/\*.*/, '*'),
+        fromPath: matchPathClean,
         toPath: path,
       })
     }
