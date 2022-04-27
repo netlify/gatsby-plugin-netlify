@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [4.3.1](https://www.github.com/netlify/gatsby-plugin-netlify/compare/v4.3.0...v4.3.1) (2022-04-27)
+
+
+### Bug Fixes
+
+* redirect named splat filesystem routes correctly for SSR/DSG pages ([#120](https://www.github.com/netlify/gatsby-plugin-netlify/issues/120)) ([cebe8d8](https://www.github.com/netlify/gatsby-plugin-netlify/commit/cebe8d85740c1148702994faf2fa2477e9c1e197))
+
 ## [4.3.0](https://www.github.com/netlify/gatsby-plugin-netlify/compare/v4.2.0...v4.3.0) (2022-04-20)
 
 
