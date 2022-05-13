@@ -72,7 +72,11 @@ export const onPostBuild = async ({ store, pathPrefix, reporter }: any, userPlug
   let count = 0
   const rewrites: any = []
 
-  const neededFunctions = { API: functions.length !== 0, SSR: false, DSG: false }
+  const neededFunctions = {
+    API: functions.length !== 0,
+    SSR: false,
+    DSG: false,
+  }
 
   ;[...pages.values()].forEach((page) => {
     const { mode, matchPath, path } = page
