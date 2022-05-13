@@ -1,7 +1,7 @@
 // https://www.netlify.com/docs/headers-and-basic-auth/
 import { join } from 'path'
 
-import { writeFile } from 'fs-extra'
+import { writeJson } from 'fs-extra'
 import { generatePageDataPath } from 'gatsby-core-utils'
 import WebpackAssetsManifest from 'webpack-assets-manifest'
 
@@ -72,7 +72,7 @@ export const onPostBuild = async ({ store, pathPrefix, reporter }: any, userPlug
   let count = 0
   const rewrites: any = []
 
-  let needsFunctions = functions.length !== 0
+  const neededFunctions = { API: functions.length !== 0, SSR: false, DSG: false }
 
   ;[...pages.values()].forEach((page) => {
     const { mode, matchPath, path } = page
@@ -80,7 +80,7 @@ export const onPostBuild = async ({ store, pathPrefix, reporter }: any, userPlug
     const matchPathIsNotPath = matchPath && matchPath !== path
 
     if (mode === `SSR` || mode === `DSG`) {
-      needsFunctions = true
+      neededFunctions[mode] = true
       const fromPath = matchPathClean ?? path
       const toPath = mode === `SSR` ? `/.netlify/functions/__ssr` : `/.netlify/functions/__dsg`
       count++
@@ -103,9 +103,8 @@ export const onPostBuild = async ({ store, pathPrefix, reporter }: any, userPlug
   })
   reporter.info(`[gatsby-plugin-netlify] Created ${count} SSR/DSG redirect${count === 1 ? `` : `s`}...`)
 
-  if (!needsFunctions) {
-    reporter.info(`[gatsby-plugin-netlify] No Netlify functions needed. Skipping...`)
-    await writeFile(join(program.directory, `.cache`, `.nf-skip-gatsby-functions`), ``)
+  if (Object.values(neededFunctions).includes(false)) {
+    await writeJson(join(program.directory, `.cache`, `.nf-skip-gatsby-functions`), neededFunctions)
   }
 
   await Promise.all([
