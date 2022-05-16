@@ -1,7 +1,7 @@
 // https://www.netlify.com/docs/headers-and-basic-auth/
 import { join } from 'path'
 
-import { writeJson } from 'fs-extra'
+import { writeJson, remove } from 'fs-extra'
 import { generatePageDataPath } from 'gatsby-core-utils'
 import WebpackAssetsManifest from 'webpack-assets-manifest'
 
@@ -107,11 +107,13 @@ export const onPostBuild = async ({ store, pathPrefix, reporter }: any, userPlug
   })
   reporter.info(`[gatsby-plugin-netlify] Created ${count} SSR/DSG redirect${count === 1 ? `` : `s`}...`)
 
-  if (Object.values(neededFunctions).includes(false)) {
-    await writeJson(join(program.directory, `.cache`, `.nf-skip-gatsby-functions`), neededFunctions)
-  }
+  const skipFilePath = join(program.directory, `.cache`, `.nf-skip-gatsby-functions`)
+  const generateSkipFile = Object.values(neededFunctions).includes(false)
+    ? writeJson(skipFilePath, neededFunctions)
+    : remove(skipFilePath)
 
   await Promise.all([
+    generateSkipFile,
     buildHeadersProgram(pluginData, pluginOptions, reporter),
     createRedirects(pluginData, redirects, rewrites),
   ])
