@@ -15,6 +15,7 @@ import {
   NETLIFY_HEADERS_FILENAME,
   PAGE_DATA_DIR,
 } from './constants'
+import { isBoolean } from './util'
 
 const getHeaderName = (header: any) => {
   const matches = header.match(/^([^:]+):/)
@@ -196,7 +197,7 @@ const validateUserOptions = (pluginOptions: any, reporter: any) => (headers: any
   }
 
   [`mergeSecurityHeaders`, `mergeLinkHeaders`, `mergeCachingHeaders`].forEach((mergeOption) => {
-    if (!_.isBoolean(pluginOptions[mergeOption])) {
+    if (!isBoolean(pluginOptions[mergeOption])) {
       throw new TypeError(
         `The "${mergeOption}" option to gatsby-plugin-netlify must be a boolean. Check your gatsby-config.js.`,
       )
