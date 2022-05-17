@@ -22,7 +22,7 @@ const getHeaderName = (header: any) => {
 }
 
 const validHeaders = (headers: any, reporter: any) => {
-  if (!headers || !_.isObject(headers)) {
+  if (!headers || typeof headers !== 'object') {
     return false
   }
 
