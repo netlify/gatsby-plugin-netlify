@@ -4,6 +4,7 @@ import { parse, posix } from 'path'
 import { writeFile, existsSync } from 'fs-extra'
 import kebabHash from 'kebab-hash'
 import _ from 'lodash'
+import mergeWith from 'lodash.mergewith'
 
 import {
   HEADER_COMMENT,
@@ -132,7 +133,7 @@ const unionMerge = (objValue: any, srcValue: any) => {
   // opt into default merge behavior
 }
 
-const defaultMerge = (...headers: any[]) => _.mergeWith({}, ...headers, unionMerge)
+const defaultMerge = (...headers: any[]) => mergeWith({}, ...headers, unionMerge)
 
 const headersMerge = (userHeaders: any, defaultHeaders: any) => {
   const merged = {}
