@@ -319,7 +319,10 @@ const applyTransformHeaders =
   ({
     transformHeaders
   }: any) =>
-  (headers: any) => _.mapValues(headers, transformHeaders)
+  (headers: any) =>  Object.fromEntries(
+      Object.entries(headers).map(([key, value]) => [key, transformHeaders(value)])
+    )
+  
 
 const transformToString = (headers: any) => `${HEADER_COMMENT}\n\n${stringifyHeaders(headers)}`
 
