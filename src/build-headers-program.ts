@@ -97,7 +97,7 @@ const preloadHeadersByPage = ({
   }
 
   pages.forEach((page: any) => {
-    const scripts = _.flatMap(COMMON_BUNDLES, (file) => getScriptPath(file, manifest))
+    const scripts = COMMON_BUNDLES.flatMap((file) => getScriptPath(file, manifest))
     scripts.push(
       ...getScriptPath(pathChunkName(page.path), manifest),
       ...getScriptPath(page.componentChunkName, manifest),
