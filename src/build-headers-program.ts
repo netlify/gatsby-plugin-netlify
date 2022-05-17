@@ -125,16 +125,14 @@ const preloadHeadersByPage = ({
   return linksByPage
 }
 
-const defaultMerge = (...headers: any[]) => {
-  const unionMerge = (objValue: any, srcValue: any) => {
-    if (Array.isArray(objValue)) {
-      return _.union(objValue, srcValue)
-    }
-    // opt into default merge behavior
+const unionMerge = (objValue: any, srcValue: any) => {
+  if (Array.isArray(objValue)) {
+    return [...new Set([...objValue, ...srcValue])]
   }
-
-  return _.mergeWith({}, ...headers, unionMerge)
+  // opt into default merge behavior
 }
+
+const defaultMerge = (...headers: any[]) => _.mergeWith({}, ...headers, unionMerge)
 
 const headersMerge = (userHeaders: any, defaultHeaders: any) => {
   const merged = {}
