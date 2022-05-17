@@ -4,3 +4,8 @@ export const isBoolean = (val: any): boolean => typeof val === 'boolean' ||
       val !== null &&
       typeof val.valueOf() === 'boolean'
     )
+
+export const flow =
+  funcs =>
+  (...args) =>
+    funcs.reduce((prev, fnc) => [fnc(...prev)], args)[0]

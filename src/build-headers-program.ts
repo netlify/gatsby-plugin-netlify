@@ -3,7 +3,6 @@ import { parse, posix } from 'path'
 
 import { writeFile, existsSync } from 'fs-extra'
 import kebabHash from 'kebab-hash'
-import _ from 'lodash'
 import mergeWith from 'lodash.mergewith'
 
 import {
@@ -16,7 +15,7 @@ import {
   NETLIFY_HEADERS_FILENAME,
   PAGE_DATA_DIR,
 } from './constants'
-import { isBoolean } from './util'
+import { isBoolean, flow } from './util'
 
 const getHeaderName = (header: any) => {
   const matches = header.match(/^([^:]+):/)
@@ -332,7 +331,8 @@ const writeHeadersFile =
   (contents: any) => writeFile(publicFolder(NETLIFY_HEADERS_FILENAME), contents)
 
 const buildHeadersProgram = (pluginData: any, pluginOptions: any, reporter: any) =>
-  _.flow(
+  flow(
+    [
     validateUserOptions(pluginOptions, reporter),
     mapUserLinkHeaders(pluginData),
     applySecurityHeaders(pluginOptions),
@@ -342,7 +342,7 @@ const buildHeadersProgram = (pluginData: any, pluginOptions: any, reporter: any)
     applyTransformHeaders(pluginOptions),
     transformToString,
     writeHeadersFile(pluginData),
-  )(pluginOptions.headers)
+    ])(pluginOptions.headers)
 
 export default buildHeadersProgram
 /* eslint-enable max-lines */
