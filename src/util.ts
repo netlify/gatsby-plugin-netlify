@@ -1,3 +1,4 @@
+// Accounting for true, false, and new Boolean()
 export const isBoolean = (val: any): boolean => typeof val === 'boolean' ||
     (
       typeof val === 'object' &&
