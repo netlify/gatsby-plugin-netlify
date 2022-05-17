@@ -315,7 +315,7 @@ const applyCachingHeaders =
     return defaultMerge(headers, cachingHeaders, CACHING_HEADERS)
   }
 
-const applyTransfromHeaders =
+const applyTransformHeaders =
   ({
     transformHeaders
   }: any) =>
@@ -337,7 +337,7 @@ const buildHeadersProgram = (pluginData: any, pluginOptions: any, reporter: any)
     applyCachingHeaders(pluginData, pluginOptions),
     mapUserLinkAllPageHeaders(pluginData, pluginOptions),
     applyLinkHeaders(pluginData, pluginOptions),
-    applyTransfromHeaders(pluginOptions),
+    applyTransformHeaders(pluginOptions),
     transformToString,
     writeHeadersFile(pluginData),
   )(pluginOptions.headers)
