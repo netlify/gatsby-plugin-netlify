@@ -1,5 +1,3 @@
-import _ from 'lodash'
-
 // Gatsby values
 export const BUILD_HTML_STAGE = `build-html`
 export const BUILD_CSS_STAGE = `build-css`
@@ -14,7 +12,7 @@ export const DEFAULT_OPTIONS = {
   mergeSecurityHeaders: true,
   mergeLinkHeaders: true,
   mergeCachingHeaders: true,
-  transformHeaders: _.identity,
+  transformHeaders: (value) => value,
   generateMatchPathRewrites: true,
 }
 
