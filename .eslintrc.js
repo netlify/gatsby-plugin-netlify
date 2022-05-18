@@ -12,7 +12,6 @@ module.exports = {
     'no-param-reassign': 0,
     'no-promise-executor-return': 0,
     'no-prototype-builtins': 0,
-    'no-unused-vars': ['error', { ignoreRestSiblings: true }],
     'unicorn/filename-case': 0,
     'unicorn/numeric-separators-style': 0,
     'unicorn/no-empty-file': 0,
