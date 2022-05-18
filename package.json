@@ -1,7 +1,7 @@
 {
   "name": "gatsby-plugin-netlify",
   "description": "A Gatsby plugin for sites deployed to Netlify",
-  "version": "4.3.1",
+  "version": "4.4.0",
   "author": "Kyle Mathews <mathews.kyle@gmail.com>",
   "bugs": {
     "url": "https://github.com/netlify/gatsby-plugin-netlify/issues"
