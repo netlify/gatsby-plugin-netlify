@@ -62,9 +62,9 @@ export const onPostBuild = async ({ store, pathPrefix, reporter }: any, userPlug
   const pluginOptions = { ...DEFAULT_OPTIONS, ...userPluginOptions }
 
   const { redirects, pages, functions = [], program } = store.getState()
-  if (pages.size > PAGE_COUNT_WARN && (pluginOptions.mergeCachingHeaders || pluginOptions.mergeLinkHeaders)) {
+  if (pages.size > PAGE_COUNT_WARN && pluginOptions.mergeCachingHeaders ) {
     reporter.warn(
-      `[gatsby-plugin-netlify] Your site has ${pages.size} pages, which means that the generated headers file could become very large. Consider disabling "mergeCachingHeaders" and "mergeLinkHeaders" in your plugin config`,
+      `[gatsby-plugin-netlify] Your site has ${pages.size} pages, which means that the generated headers file could become very large. Consider disabling "mergeCachingHeaders" in your plugin config`,
     )
   }
   reporter.info(`[gatsby-plugin-netlify] Creating SSR/DSG redirects...`)

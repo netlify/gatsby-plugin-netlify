@@ -194,7 +194,7 @@ const validateUserOptions = (pluginOptions: any, reporter: any) => (headers: any
     )
   }
 
-  [`mergeSecurityHeaders`, `mergeLinkHeaders`, `mergeCachingHeaders`].forEach((mergeOption) => {
+  [`mergeSecurityHeaders`, `mergeCachingHeaders`].forEach((mergeOption) => {
     if (!isBoolean(pluginOptions[mergeOption])) {
       throw new TypeError(
         `The "${mergeOption}" option to gatsby-plugin-netlify must be a boolean. Check your gatsby-config.js.`,
@@ -246,26 +246,6 @@ const mapUserLinkAllPageHeaders =
     })
 
     return defaultMerge(headers, duplicateHeadersByPage)
-  }
-
-const applyLinkHeaders =
-  (pluginData: any, {
-    mergeLinkHeaders
-  }: any) =>
-  (headers: any) => {
-    if (!mergeLinkHeaders) {
-      return headers
-    }
-
-    const { pages, manifest, pathPrefix, publicFolder } = pluginData
-    const perPageHeaders = preloadHeadersByPage({
-      pages,
-      manifest,
-      pathPrefix,
-      publicFolder,
-    })
-
-    return defaultMerge(headers, perPageHeaders)
   }
 
 const applySecurityHeaders =
@@ -340,7 +320,6 @@ const buildHeadersProgram = (pluginData: any, pluginOptions: any, reporter: any)
     applySecurityHeaders(pluginOptions),
     applyCachingHeaders(pluginData, pluginOptions),
     mapUserLinkAllPageHeaders(pluginData, pluginOptions),
-    applyLinkHeaders(pluginData, pluginOptions),
     applyTransformHeaders(pluginOptions),
     transformToString,
     writeHeadersFile(pluginData),
