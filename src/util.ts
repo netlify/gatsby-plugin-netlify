@@ -6,19 +6,26 @@ export const isBoolean = (val: any): boolean => typeof val === 'boolean' ||
       typeof val.valueOf() === 'boolean'
     )
 
+type Header = string
+type Headers = Header[] 
+
+// TODO: better return type
+type FlowableFunction = (...flowArgs: Headers) => any;
 /**
  * 
  * @param functions - takes in an array of functions
  * @returns The function documented below
  */
 export const flow =
-functions =>
+<FlowReturnType = Promise<any>>(functions: FlowableFunction[]) =>
   /**
    * 
-   * @param args - In our case, args is only {pluginOptions.headers} (in build-headers-program.ts), 
+   * @param headers - In our case, headers is only {pluginOptions.headers} (in build-headers-program.ts), 
    * but in this generic implementation could take in any number of arguments
+   * 
    * @returns The evaluated return value of the last function from the array of functions provided in the
    *  {functions} parameter
    */
-  (...args) =>
-  functions.reduce((prev, fnc) => [fnc(...prev)], args)[0]
+  (...headers: Headers): FlowReturnType => functions.reduce((resultOfPrev, func) => [func(...resultOfPrev)], headers)[0]
+
+  
