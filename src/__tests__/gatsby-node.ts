@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 jest.mock('../plugin-data', () => ({
   __esModule: true,
   default: jest.fn().mockReturnValue({
@@ -14,10 +15,12 @@ jest.mock('fs-extra', () => ({
   existsSync: jest.fn(),
   readFile: jest.fn(),
   writeFile: jest.fn(),
+  writeJson: jest.fn(),
+  remove: jest.fn(),
 }))
 
 // Importing writeFile here gives us access to the mocked method to assert the correct content is written to the file within test cases
-import { writeFile } from 'fs-extra'
+import { writeFile, writeJson, remove } from 'fs-extra'
 import { testPluginOptionsSchema } from 'gatsby-plugin-utils'
 
 import { pluginOptionsSchema, onPostBuild } from '../gatsby-node'
@@ -67,12 +70,12 @@ describe(`gatsby-node.js`, () => {
   })
 
   describe('onPostBuild', () => {
-    let store = {}
     const reporter = {
       info: jest.fn(),
     }
-    beforeEach(() => {
-      store = {
+
+    it('creates redirects for SSR and DSG pages in format Netlify expects', async () => {
+      const store = {
         getState: jest.fn().mockReturnValue({
           redirects: [],
           pages: [
@@ -89,13 +92,6 @@ describe(`gatsby-node.js`, () => {
           program: { directory: '' },
         }),
       }
-    })
-
-    afterEach(() => {
-      jest.resetAllMocks()
-    })
-
-    it('creates redirects for SSR and DSG pages in format Netlify expects', async () => {
       const expectedValue = [
         '',
         '## Created with gatsby-plugin-netlify',
@@ -106,7 +102,55 @@ describe(`gatsby-node.js`, () => {
       ].join(`\n`)
 
       await onPostBuild({ store, pathPrefix: '', reporter }, {})
-      expect(writeFile).toHaveBeenCalledWith('mock-file-path', expectedValue)
+      expect(writeFile).toHaveBeenLastCalledWith('mock-file-path', expectedValue)
+    })
+
+    it('creates skip file for unneeded function bundles', async () => {
+      const store = {
+        getState: jest.fn().mockReturnValue({
+          redirects: [],
+          pages: [
+            {
+              mode: 'DSG',
+              path: 'some/other/path',
+            },
+          ],
+          functions: [],
+          program: { directory: '' },
+        }),
+      }
+      const expectedValue = {
+        API: false,
+        SSR: false,
+        DSG: true,
+      }
+
+      await onPostBuild({ store, pathPrefix: '', reporter }, {})
+      expect(writeJson).toHaveBeenLastCalledWith('.cache/.nf-skip-gatsby-functions', expectedValue)
+    })
+
+    it('removes skip file when all function bundles needed', async () => {
+      const store = {
+        getState: jest.fn().mockReturnValue({
+          redirects: [],
+          pages: [
+            {
+              mode: 'SSR',
+              path: 'some/path',
+            },
+            {
+              mode: 'DSG',
+              path: 'some/other/path',
+            },
+          ],
+          functions: [true],
+          program: { directory: '' },
+        }),
+      }
+
+      await onPostBuild({ store, pathPrefix: '', reporter }, {})
+      expect(remove).toHaveBeenCalled()
     })
   })
 })
+/* eslint-enable max-lines-per-function */

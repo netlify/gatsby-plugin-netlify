@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.4.0](https://www.github.com/netlify/gatsby-plugin-netlify/compare/v4.3.1...v4.4.0) (2022-05-18)
+
+
+### Features
+
+* write granular info into skip file ([#128](https://www.github.com/netlify/gatsby-plugin-netlify/issues/128)) ([abefe10](https://www.github.com/netlify/gatsby-plugin-netlify/commit/abefe10bcf5cf28ba1eaf1372ac513315797725e))
+
 ### [4.3.1](https://www.github.com/netlify/gatsby-plugin-netlify/compare/v4.3.0...v4.3.1) (2022-04-27)
 
 
