@@ -6,7 +6,18 @@ export const isBoolean = (val: any): boolean => typeof val === 'boolean' ||
       typeof val.valueOf() === 'boolean'
     )
 
+/**
+ * 
+ * @param functions - takes in an array of functions
+ * @returns 
+ */
 export const flow =
-  funcs =>
+functions =>
+  /**
+   * 
+   * @param args - In our case, args is only {pluginOptions.headers} (in build-headers-program.ts), 
+   * but in this generic implementation could take in any number of arguments
+   * @returns The evaluated return value of the last function
+   */
   (...args) =>
-    funcs.reduce((prev, fnc) => [fnc(...prev)], args)[0]
+  functions.reduce((prev, fnc) => [fnc(...prev)], args)[0]
