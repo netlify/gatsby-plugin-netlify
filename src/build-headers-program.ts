@@ -3,7 +3,7 @@ import { parse, posix } from 'path'
 
 import { writeFile, existsSync } from 'fs-extra'
 import kebabHash from 'kebab-hash'
-import _ from 'lodash'
+import mergeWith from 'lodash.mergewith'
 
 import {
   HEADER_COMMENT,
@@ -15,6 +15,7 @@ import {
   NETLIFY_HEADERS_FILENAME,
   PAGE_DATA_DIR,
 } from './constants'
+import { isBoolean, flow } from './util'
 
 const getHeaderName = (header: any) => {
   const matches = header.match(/^([^:]+):/)
@@ -22,7 +23,7 @@ const getHeaderName = (header: any) => {
 }
 
 const validHeaders = (headers: any, reporter: any) => {
-  if (!headers || !_.isObject(headers)) {
+  if (!headers || typeof headers !== 'object') {
     return false
   }
 
@@ -97,7 +98,7 @@ const preloadHeadersByPage = ({
   }
 
   pages.forEach((page: any) => {
-    const scripts = _.flatMap(COMMON_BUNDLES, (file) => getScriptPath(file, manifest))
+    const scripts = COMMON_BUNDLES.flatMap((file) => getScriptPath(file, manifest))
     scripts.push(
       ...getScriptPath(pathChunkName(page.path), manifest),
       ...getScriptPath(page.componentChunkName, manifest),
@@ -124,16 +125,14 @@ const preloadHeadersByPage = ({
   return linksByPage
 }
 
-const defaultMerge = (...headers: any[]) => {
-  const unionMerge = (objValue: any, srcValue: any) => {
-    if (Array.isArray(objValue)) {
-      return _.union(objValue, srcValue)
-    }
-    // opt into default merge behavior
+const unionMerge = (objValue: any, srcValue: any) => {
+  if (Array.isArray(objValue)) {
+    return [...new Set([...objValue, ...srcValue])]
   }
-
-  return _.mergeWith({}, ...headers, unionMerge)
+  // opt into default merge behavior
 }
+
+const defaultMerge = (...headers: any[]) => mergeWith({}, ...headers, unionMerge)
 
 const headersMerge = (userHeaders: any, defaultHeaders: any) => {
   const merged = {}
@@ -196,7 +195,7 @@ const validateUserOptions = (pluginOptions: any, reporter: any) => (headers: any
   }
 
   [`mergeSecurityHeaders`, `mergeLinkHeaders`, `mergeCachingHeaders`].forEach((mergeOption) => {
-    if (!_.isBoolean(pluginOptions[mergeOption])) {
+    if (!isBoolean(pluginOptions[mergeOption])) {
       throw new TypeError(
         `The "${mergeOption}" option to gatsby-plugin-netlify must be a boolean. Check your gatsby-config.js.`,
       )
@@ -314,11 +313,16 @@ const applyCachingHeaders =
     return defaultMerge(headers, cachingHeaders, CACHING_HEADERS)
   }
 
-const applyTransfromHeaders =
+const applyTransformHeaders =
   ({
     transformHeaders
   }: any) =>
-  (headers: any) => _.mapValues(headers, transformHeaders)
+  (headers: any) =>  
+    Object.entries(headers).reduce((temp, [key, value]) => {
+      temp[key] = transformHeaders(value)
+      return temp
+    }, {})
+  
 
 const transformToString = (headers: any) => `${HEADER_COMMENT}\n\n${stringifyHeaders(headers)}`
 
@@ -328,18 +332,22 @@ const writeHeadersFile =
   }: any) =>
   (contents: any) => writeFile(publicFolder(NETLIFY_HEADERS_FILENAME), contents)
 
-const buildHeadersProgram = (pluginData: any, pluginOptions: any, reporter: any) =>
-  _.flow(
+const buildHeadersProgram = (pluginData: any, pluginOptions: any, reporter: any) => {
+  const returnVal = flow(
+    [
     validateUserOptions(pluginOptions, reporter),
     mapUserLinkHeaders(pluginData),
     applySecurityHeaders(pluginOptions),
     applyCachingHeaders(pluginData, pluginOptions),
     mapUserLinkAllPageHeaders(pluginData, pluginOptions),
     applyLinkHeaders(pluginData, pluginOptions),
-    applyTransfromHeaders(pluginOptions),
+    applyTransformHeaders(pluginOptions),
     transformToString,
     writeHeadersFile(pluginData),
-  )(pluginOptions.headers)
+    ])(pluginOptions.headers)
+    console.log({returnVal})
+    return returnVal
+  }
 
 export default buildHeadersProgram
 /* eslint-enable max-lines */
