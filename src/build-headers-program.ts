@@ -332,8 +332,8 @@ const writeHeadersFile =
   }: any) =>
   (contents: any) => writeFile(publicFolder(NETLIFY_HEADERS_FILENAME), contents)
 
-const buildHeadersProgram = (pluginData: any, pluginOptions: any, reporter: any) => {
-  const returnVal = flow(
+const buildHeadersProgram = (pluginData: any, pluginOptions: any, reporter: any) => 
+  flow(
     [
     validateUserOptions(pluginOptions, reporter),
     mapUserLinkHeaders(pluginData),
@@ -345,9 +345,7 @@ const buildHeadersProgram = (pluginData: any, pluginOptions: any, reporter: any)
     transformToString,
     writeHeadersFile(pluginData),
     ])(pluginOptions.headers)
-    console.log({returnVal})
-    return returnVal
-  }
+  
 
 export default buildHeadersProgram
 /* eslint-enable max-lines */
