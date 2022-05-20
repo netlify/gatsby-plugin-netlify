@@ -24,25 +24,6 @@ describe(`build-headers-program`, () => {
     existsSync.mockReturnValue(true)
   })
 
-  it(`with caching headers`, async () => {
-    const pluginData = await createPluginData()
-
-    const pluginOptions = {
-      ...DEFAULT_OPTIONS,
-      mergeCachingHeaders: true,
-    }
-
-    await buildHeadersProgram(pluginData, pluginOptions, reporter)
-
-    expect(reporter.panic).not.toHaveBeenCalled()
-    const output = await readFile(pluginData.publicFolder(`_headers`), `utf8`)
-    expect(output).toMatchSnapshot()
-    expect(output).toMatch(/app-data\.json/)
-    expect(output).toMatch(/page-data\.json/)
-    // we should only check page-data & app-data once which leads to 2 times
-    expect(existsSync).toBeCalledTimes(2)
-  })
-
   it(`with manifest['pages-manifest']`, async () => {
     const pluginData = await createPluginData()
 
@@ -62,8 +43,6 @@ describe(`build-headers-program`, () => {
     const output = await readFile(pluginData.publicFolder(`_headers`), `utf8`)
     expect(output).toMatchSnapshot()
     expect(output).toMatch(/\/pages-manifest-ab11f09e0ca7ecd3b43e\.js/g)
-    expect(output).not.toMatch(/\/app-data\.json/g)
-    expect(output).not.toMatch(/\/page-data\.json/g)
     expect(output).not.toMatch(/\/undefined/g)
   })
 

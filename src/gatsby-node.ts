@@ -25,7 +25,7 @@ export const pluginOptionsSchema = ({ Joi }: any) => {
     headers: headersSchema,
     allPageHeaders: Joi.array().items(Joi.string()).description(`Add more headers to all the pages`),
     mergeSecurityHeaders: Joi.boolean().description(`When set to false, turns off the default security headers`),
-    mergeLinkHeaders: Joi.boolean().description(`When set to false, turns off the default gatsby js headers`),
+    mergeLinkHeaders: Joi.boolean().description(`Deprecated`),
     mergeCachingHeaders: Joi.boolean().description(`When set to false, turns off the default caching headers`),
     transformHeaders: Joi.function()
       .maxArity(2)
