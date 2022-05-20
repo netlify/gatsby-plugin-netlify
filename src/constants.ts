@@ -35,10 +35,6 @@ export const CACHING_HEADERS = {
 export const LINK_REGEX = /^(Link: <\/)(.+)(>;.+)/
 export const ROOT_WILDCARD = `/*`
 
-export const COMMON_BUNDLES = [`commons`, `app`]
-
 export const HEADER_COMMENT = `## Created with gatsby-plugin-netlify`
-
-export const PAGE_DATA_DIR = `page-data/`
 
 export const PAGE_COUNT_WARN = 1000
