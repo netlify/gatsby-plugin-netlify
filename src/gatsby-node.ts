@@ -25,7 +25,9 @@ export const pluginOptionsSchema = ({ Joi }: any) => {
     headers: headersSchema,
     allPageHeaders: Joi.array().items(Joi.string()).description(`Add more headers to all the pages`),
     mergeSecurityHeaders: Joi.boolean().description(`When set to false, turns off the default security headers`),
-    mergeLinkHeaders: Joi.boolean().description(`When set to false, turns off the default gatsby js headers`),
+    mergeLinkHeaders: Joi.boolean().description(`When set to false, turns off the default gatsby js headers`).forbidden().messages({
+      "any.unknown": `"mergeLinkHeaders" is no longer supported. Gatsby no longer adds preload headers as they negatively affect load performance`
+    }),
     mergeCachingHeaders: Joi.boolean().description(`When set to false, turns off the default caching headers`),
     transformHeaders: Joi.function()
       .maxArity(2)
@@ -62,9 +64,9 @@ export const onPostBuild = async ({ store, pathPrefix, reporter }: any, userPlug
   const pluginOptions = { ...DEFAULT_OPTIONS, ...userPluginOptions }
 
   const { redirects, pages, functions = [], program } = store.getState()
-  if (pages.size > PAGE_COUNT_WARN && (pluginOptions.mergeCachingHeaders || pluginOptions.mergeLinkHeaders)) {
+  if (pages.size > PAGE_COUNT_WARN && pluginOptions.mergeCachingHeaders ) {
     reporter.warn(
-      `[gatsby-plugin-netlify] Your site has ${pages.size} pages, which means that the generated headers file could become very large. Consider disabling "mergeCachingHeaders" and "mergeLinkHeaders" in your plugin config`,
+      `[gatsby-plugin-netlify] Your site has ${pages.size} pages, which means that the generated headers file could become very large. Consider disabling "mergeCachingHeaders" in your plugin config`,
     )
   }
   reporter.info(`[gatsby-plugin-netlify] Creating SSR/DSG redirects...`)

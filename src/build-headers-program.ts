@@ -1,19 +1,14 @@
 /* eslint-disable max-lines */
-import { parse, posix } from 'path'
-
 import { writeFile, existsSync } from 'fs-extra'
-import kebabHash from 'kebab-hash'
 import mergeWith from 'lodash.mergewith'
 
 import {
   HEADER_COMMENT,
   IMMUTABLE_CACHING_HEADER,
-  COMMON_BUNDLES,
   SECURITY_HEADERS,
   CACHING_HEADERS,
   LINK_REGEX,
   NETLIFY_HEADERS_FILENAME,
-  PAGE_DATA_DIR,
 } from './constants'
 import { isBoolean, flow } from './util'
 
@@ -41,89 +36,7 @@ const validHeaders = (headers: any, reporter: any) => {
   )
 }
 
-const linkTemplate = (assetPath: any, type = `script`) =>
-  `Link: <${assetPath}>; rel=preload; as=${type}${type === `fetch` ? `; crossorigin` : ``}`
-
-const pathChunkName = (path: any) => {
-  const name = path === `/` ? `index` : kebabHash(path)
-  return `path---${name}`
-}
-
-const getPageDataPath = (path: any) => {
-  const fixedPagePath = path === `/` ? `index` : path
-  return posix.join(`page-data`, fixedPagePath, `page-data.json`)
-}
-
-const getScriptPath = (file: any, manifest: any) => {
-  const chunk = manifest[file]
-
-  if (!chunk) {
-    return []
-  }
-
-  // convert to array if it's not already
-  const chunks = Array.isArray(chunk) ? chunk : [chunk]
-
-  return chunks.filter((script) => {
-    const parsed = parse(script)
-    // handle only .js, .css content is inlined already
-    // and doesn't need to be pushed
-    return parsed.ext === `.js`
-  })
-}
-
-const getLinkHeaders = (filesByType: any, pathPrefix: any) =>
-  Object.entries(filesByType).flatMap(([type, files]: [string, Array<string>]) =>
-    files.map((file) => linkTemplate(`${pathPrefix}/${file}`, type)),
-  )
-
 const headersPath = (pathPrefix: any, path: any) => `${pathPrefix}${path}`
-
-const preloadHeadersByPage = ({
-  pages,
-  manifest,
-  pathPrefix,
-  publicFolder
-}: any) => {
-  const linksByPage = {}
-
-  const appDataPath = publicFolder(PAGE_DATA_DIR, `app-data.json`)
-  const hasAppData = existsSync(appDataPath)
-
-  let hasPageData = false
-  if (pages.size !== 0) {
-    // test if 1 page-data file exists, if it does we know we're on a gatsby version that supports page-data
-    const pageDataPath = publicFolder(getPageDataPath(pages.get(pages.keys().next().value).path))
-    hasPageData = existsSync(pageDataPath)
-  }
-
-  pages.forEach((page: any) => {
-    const scripts = COMMON_BUNDLES.flatMap((file) => getScriptPath(file, manifest))
-    scripts.push(
-      ...getScriptPath(pathChunkName(page.path), manifest),
-      ...getScriptPath(page.componentChunkName, manifest),
-    )
-
-    const json = []
-    if (hasAppData) {
-      json.push(posix.join(PAGE_DATA_DIR, `app-data.json`))
-    }
-
-    if (hasPageData) {
-      json.push(getPageDataPath(page.path))
-    }
-
-    const filesByResourceType = {
-      script: scripts.filter(Boolean),
-      fetch: json,
-    }
-
-    const pathKey = headersPath(pathPrefix, page.path)
-    linksByPage[pathKey] = getLinkHeaders(filesByResourceType, pathPrefix)
-  })
-
-  return linksByPage
-}
 
 const unionMerge = (objValue: any, srcValue: any) => {
   if (Array.isArray(objValue)) {
@@ -194,7 +107,7 @@ const validateUserOptions = (pluginOptions: any, reporter: any) => (headers: any
     )
   }
 
-  [`mergeSecurityHeaders`, `mergeLinkHeaders`, `mergeCachingHeaders`].forEach((mergeOption) => {
+  [`mergeSecurityHeaders`, `mergeCachingHeaders`].forEach((mergeOption) => {
     if (!isBoolean(pluginOptions[mergeOption])) {
       throw new TypeError(
         `The "${mergeOption}" option to gatsby-plugin-netlify must be a boolean. Check your gatsby-config.js.`,
@@ -246,26 +159,6 @@ const mapUserLinkAllPageHeaders =
     })
 
     return defaultMerge(headers, duplicateHeadersByPage)
-  }
-
-const applyLinkHeaders =
-  (pluginData: any, {
-    mergeLinkHeaders
-  }: any) =>
-  (headers: any) => {
-    if (!mergeLinkHeaders) {
-      return headers
-    }
-
-    const { pages, manifest, pathPrefix, publicFolder } = pluginData
-    const perPageHeaders = preloadHeadersByPage({
-      pages,
-      manifest,
-      pathPrefix,
-      publicFolder,
-    })
-
-    return defaultMerge(headers, perPageHeaders)
   }
 
 const applySecurityHeaders =
@@ -340,7 +233,6 @@ const buildHeadersProgram = (pluginData: any, pluginOptions: any, reporter: any)
     applySecurityHeaders(pluginOptions),
     applyCachingHeaders(pluginData, pluginOptions),
     mapUserLinkAllPageHeaders(pluginData, pluginOptions),
-    applyLinkHeaders(pluginData, pluginOptions),
     applyTransformHeaders(pluginOptions),
     transformToString,
     writeHeadersFile(pluginData),
