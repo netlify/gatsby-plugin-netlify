@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.0.0](https://www.github.com/netlify/gatsby-plugin-netlify/compare/v4.4.0...v5.0.0) (2022-05-24)
+
+
+### ⚠ BREAKING CHANGES
+
+* Remove script preloading (#134)
+
+### Features
+
+* Remove script preloading ([#134](https://www.github.com/netlify/gatsby-plugin-netlify/issues/134)) ([5a0397a](https://www.github.com/netlify/gatsby-plugin-netlify/commit/5a0397a8c80914070de03445538d7449ca085cad))
+
 ## [4.4.0](https://www.github.com/netlify/gatsby-plugin-netlify/compare/v4.3.1...v4.4.0) (2022-05-18)
 
 
