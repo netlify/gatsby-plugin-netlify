@@ -66,6 +66,6 @@
     "watch": "tsc --watch"
   },
   "engines": {
-    "node": ">=12.13.0"
+    "node": ">=14.0.0"
   }
 }
