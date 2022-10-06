@@ -35,6 +35,9 @@
     "prettier": "^2.3.2",
     "typescript": "^4.5.4"
   },
+  "resolutions": {
+    "@typescript-eslint/eslint-plugin": "^5.0.0"
+  },
   "homepage": "https://github.com/netlify/gatsby-plugin-netlify#readme",
   "keywords": [
     "gatsby",
