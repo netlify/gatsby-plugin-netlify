@@ -11,7 +11,7 @@ const buildPrefixer =
 const makePluginData = (store: any, assetsManifest: any, pathPrefix: any) => {
   const { program, pages, components } = store.getState()
   const publicFolder = buildPrefixer(program.directory, `public`)
-  // eslint-disable-next-line node/global-require, import/no-dynamic-require, @typescript-eslint/no-var-requires
+  // eslint-disable-next-line n/global-require, import/no-dynamic-require, @typescript-eslint/no-var-requires
   const stats = require(publicFolder(`webpack.stats.json`))
   // Get all the files, not just the first
   const chunkManifest = stats.assetsByChunkName
