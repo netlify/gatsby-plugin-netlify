@@ -15,7 +15,7 @@
   "dependencies": {
     "@babel/runtime": "^7.16.7",
     "fs-extra": "^10.0.0",
-    "gatsby-core-utils": "^3.5.2",
+    "gatsby-core-utils": "^4.0.0",
     "kebab-hash": "^0.1.2",
     "lodash.mergewith": "^4.6.2",
     "webpack-assets-manifest": "^5.0.6"
@@ -27,10 +27,10 @@
     "@babel/eslint-plugin": "^7.16.5",
     "@netlify/eslint-config-node": "^5.1.8",
     "@types/jest": "^28.0.0",
-    "babel-preset-gatsby-package": "^2.5.0",
+    "babel-preset-gatsby-package": "^3.0.0",
     "cross-env": "^7.0.3",
-    "gatsby": "^4.5.3",
-    "gatsby-plugin-utils": "^3.0.0",
+    "gatsby": "^5.0.1",
+    "gatsby-plugin-utils": "^4.0.0",
     "jest": "^28.0.0",
     "prettier": "^2.3.2",
     "typescript": "^4.5.4"
@@ -45,7 +45,7 @@
   "license": "MIT",
   "main": "index.js",
   "peerDependencies": {
-    "gatsby": "^4.0.0"
+    "gatsby": "^4.0 || ^5.0"
   },
   "repository": {
     "type": "git",
@@ -66,6 +66,6 @@
     "watch": "tsc --watch"
   },
   "engines": {
-    "node": ">=14.0.0"
+    "node": ">=18.0.0"
   }
 }
