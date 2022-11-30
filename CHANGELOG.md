@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.1.0](https://www.github.com/netlify/gatsby-plugin-netlify/compare/v5.0.1...v5.1.0) (2022-11-30)
+
+
+### Features
+
+* support Gatsby v5 ([#203](https://www.github.com/netlify/gatsby-plugin-netlify/issues/203)) ([5bda14f](https://www.github.com/netlify/gatsby-plugin-netlify/commit/5bda14f3da4a1e0d8faefab3eca8536095796318))
+
+
+### Bug Fixes
+
+* **deps:** update dependency @babel/runtime to v7.19.4 ([#186](https://www.github.com/netlify/gatsby-plugin-netlify/issues/186)) ([0f51e02](https://www.github.com/netlify/gatsby-plugin-netlify/commit/0f51e020da5e55830754b39d78252eb3339f67cd))
+* **deps:** update dependency @babel/runtime to v7.20.0 ([#192](https://www.github.com/netlify/gatsby-plugin-netlify/issues/192)) ([214e991](https://www.github.com/netlify/gatsby-plugin-netlify/commit/214e991d48c98dc37575284788d468a5a4ed5f5e))
+
 ### [5.0.1](https://www.github.com/netlify/gatsby-plugin-netlify/compare/v5.0.0...v5.0.1) (2022-07-25)
 
 
