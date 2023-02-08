@@ -182,18 +182,16 @@ const applyCachingHeaders =
       return headers
     }
 
-    let chunks = []
-    // Gatsby v3.5 added componentChunkName to store().components
-    // So we prefer to pull chunk names off that as it gets very expensive to loop
-    // over large numbers of pages.
-    const isComponentChunkSet = Boolean(pluginData.components.entries()?.next()?.value[1]?.componentChunkName)
-    chunks = isComponentChunkSet
-      ? [...pluginData.components.values()].map((c) => c.componentChunkName)
-      : [...pluginData.pages.values()].map((page) => page.componentChunkName)
-
-    chunks.push(`pages-manifest`, `app`)
-
-    const files = chunks.flatMap((chunk) => pluginData.manifest[chunk])
+    const files = new Set()
+    for (const fileNameOrArrayOfFileNames of Object.values(pluginData.manifest)) {
+      if (Array.isArray(fileNameOrArrayOfFileNames)) {
+        for (const filename of fileNameOrArrayOfFileNames) {
+          files.add(filename)
+        }
+      } else if (typeof fileNameOrArrayOfFileNames === `string`) {
+        files.add(fileNameOrArrayOfFileNames)
+      }
+    }
 
     const cachingHeaders = {}
 

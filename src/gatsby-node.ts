@@ -6,7 +6,7 @@ import { generatePageDataPath } from 'gatsby-core-utils'
 import WebpackAssetsManifest from 'webpack-assets-manifest'
 
 import buildHeadersProgram from './build-headers-program'
-import { DEFAULT_OPTIONS, BUILD_HTML_STAGE, BUILD_CSS_STAGE, PAGE_COUNT_WARN } from './constants'
+import { DEFAULT_OPTIONS, BUILD_BROWSER_BUNDLE_STAGE, PAGE_COUNT_WARN } from './constants'
 import createRedirects from './create-redirects'
 import makePluginData from './plugin-data'
 
@@ -44,7 +44,8 @@ export const pluginOptionsSchema = ({ Joi }: any) => {
 /** @type {import("gatsby").GatsbyNode["onCreateWebpackConfig"]} */
 
 export const onCreateWebpackConfig = ({ actions, stage }: any) => {
-  if (stage !== BUILD_HTML_STAGE && stage !== BUILD_CSS_STAGE) {
+  // We only need to get manifest for production browser bundle
+  if (stage !== BUILD_BROWSER_BUNDLE_STAGE) {
     return
   }
   actions.setWebpackConfig({
