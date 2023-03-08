@@ -16,34 +16,41 @@ if you want to use SSR or DSG rendering.
 
 ## Install
 
-`npm install gatsby-plugin-netlify`
+```shell
+npm install gatsby-plugin-netlify
+```
 
 ## How to use
 
-```javascript
-// In your gatsby-config.js
-plugins: [`gatsby-plugin-netlify`]
+Add `gatsby-plugin-netlify` to your `gatsby-config`:
+
+```js:title=gatsby-config.js
+module.exports = {
+  plugins: [`gatsby-plugin-netlify`]
+}
 ```
 
 ## Configuration
 
 If you just need the critical assets, you don't need to add any additional config. However, if you want to add headers,
-remove default headers, or transform the given headers, you can use the following configuration options.
+remove default headers, or transform the given headers, you can use the following configuration options:
 
-```javascript
-plugins: [
-  {
-    resolve: `gatsby-plugin-netlify`,
-    options: {
-      headers: {}, // option to add more headers. `Link` headers are transformed by the below criteria
-      allPageHeaders: [], // option to add headers for all pages. `Link` headers are transformed by the below criteria
-      mergeSecurityHeaders: true, // boolean to turn off the default security headers
-      mergeCachingHeaders: true, // boolean to turn off the default caching headers
-      transformHeaders: (headers, path) => headers, // optional transform for manipulating headers under each path (e.g.sorting), etc.
-      generateMatchPathRewrites: true, // boolean to turn off automatic creation of redirect rules for client only paths
+```js:title=gatsby-config.js
+module.exports = {
+  plugins: [
+    {
+      resolve: `gatsby-plugin-netlify`,
+      options: {
+        headers: {}, // option to add more headers. `Link` headers are transformed by the below criteria
+        allPageHeaders: [], // option to add headers for all pages. `Link` headers are transformed by the below criteria
+        mergeSecurityHeaders: true, // boolean to turn off the default security headers
+        mergeCachingHeaders: true, // boolean to turn off the default caching headers
+        transformHeaders: (headers, path) => headers, // optional transform for manipulating headers under each path (e.g.sorting), etc.
+        generateMatchPathRewrites: true, // boolean to turn off automatic creation of redirect rules for client only paths
+      },
     },
-  },
-]
+  ]
+}
 ```
 
 ### Headers
@@ -101,25 +108,30 @@ You can validate the `_headers` config through the [Netlify playground app](http
 
 ### Redirects
 
-You can create redirects using the [`createRedirect`](https://www.gatsbyjs.org/docs/actions/#createRedirect) action.
+You can create redirects using the
+[`createRedirect`](https://www.gatsbyjs.com/docs/reference/config-files/actions/#createRedirect) action.
 
 In addition to the options provided by the Gatsby API, you can pass these options specific to this plugin:
 
-| Attribute    | Description                                                                                                                                                                                                                                                                                                                                                                                                      |
-| ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `force`      | Overrides existing content in the path. This is particularly useful for domain alias redirects. See [the Netlify documentation for this option](https://www.netlify.com/docs/redirects/#structured-configuration).                                                                                                                                                                                               |
-| `statusCode` | Overrides the HTTP status code which is set to `302` by default or `301` when [`isPermanent`](https://www.gatsbyjs.org/docs/actions/#createRedirect) is `true`. Since Netlify supports custom status codes, you can set one here. For example, `200` for rewrites, or `404` for a custom error page. See [the Netlify documentation for this option](https://www.netlify.com/docs/redirects/#http-status-codes). |
+| Attribute    | Description                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `force`      | Overrides existing content in the path. This is particularly useful for domain alias redirects. See [the Netlify documentation for this option](https://www.netlify.com/docs/redirects/#structured-configuration).                                                                                                                                                                                                                      |
+| `statusCode` | Overrides the HTTP status code which is set to `302` by default or `301` when [`isPermanent`](https://www.gatsbyjs.com/docs/reference/config-files/actions/#createRedirect) is `true`. Since Netlify supports custom status codes, you can set one here. For example, `200` for rewrites, or `404` for a custom error page. See [the Netlify documentation for this option](https://www.netlify.com/docs/redirects/#http-status-codes). |
 
 An example:
 
-```javascript
-createRedirect({ fromPath: '/old-url', toPath: '/new-url', isPermanent: true })
-createRedirect({ fromPath: '/url', toPath: '/zn-CH/url', Language: 'zn' })
-createRedirect({
-  fromPath: '/url_that_is/not_pretty',
-  toPath: '/pretty/url',
-  statusCode: 200,
-})
+```js:title=gatsby-node.js
+exports.createPages = ({ actions }) => {
+  const { createRedirect } = actions
+
+  createRedirect({ fromPath: '/old-url', toPath: '/new-url', isPermanent: true })
+  createRedirect({ fromPath: '/url', toPath: '/zn-CH/url', Language: 'zn' })
+  createRedirect({
+    fromPath: '/url_that_is/not_pretty',
+    toPath: '/pretty/url',
+    statusCode: 200,
+  })
+}
 ```
 
 You can also create a `_redirects` file in the `static` folder for the same effect. Any programmatically created
@@ -134,10 +146,10 @@ redirects will be appended to the file.
 You can validate the `_redirects` config through the [Netlify playground app](https://play.netlify.com/redirects).
 
 Redirect rules are automatically added for
-[client only paths](https://www.gatsbyjs.org/docs/client-only-routes-and-user-authentication). The plugin uses the
-[matchPath](https://www.gatsbyjs.org/docs/gatsby-internals-terminology/#matchpath) syntax to match all possible requests
-in the range of your client-side routes and serves the HTML file for the client-side route. Without it, only the exact
-route of the client-side route works.
+[client only paths](https://www.gatsbyjs.com/docs/how-to/routing/client-only-routes-and-user-authentication/). The
+plugin uses the [matchPath](https://www.gatsbyjs.com/docs/gatsby-internals-terminology/#matchpath) syntax to match all
+possible requests in the range of your client-side routes and serves the HTML file for the client-side route. Without
+it, only the exact route of the client-side route works.
 
 If those rules are conflicting with custom rules or if you want to have more control over them you can disable them in
 [configuration](#configuration) by setting `generateMatchPathRewrites` to `false`.
