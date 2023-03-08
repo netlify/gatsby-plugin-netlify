@@ -143,8 +143,6 @@ export const createPluginData = async () => {
       ],
     ]),
     manifest: {
-      'main.js': `render-page.js`,
-      'main.js.map': `render-page.js.map`,
       app: [
         `webpack-runtime-acaa8994f1f704475e21.js`,
         `styles.1025963f4f2ec7abbad4.css`,
@@ -166,6 +164,7 @@ export const createPluginData = async () => {
         `0-0180cd94ef2497ac7db8.js`,
         `component---src-pages-index-js-0bdd01c77ee09ef0224c.js`,
       ],
+      '711-90491aa56de138c82516.js': `711-90491aa56de138c82516.js`,
     },
     pathPrefix: ``,
     publicFolder: (...files: any[]) => join(tmpDir, ...files),

@@ -1,6 +1,5 @@
 // Gatsby values
-export const BUILD_HTML_STAGE = `build-html`
-export const BUILD_CSS_STAGE = `build-css`
+export const BUILD_BROWSER_BUNDLE_STAGE = `build-javascript`
 
 // Plugin values
 export const NETLIFY_HEADERS_FILENAME = `_headers`
