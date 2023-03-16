@@ -2,8 +2,20 @@ import { existsSync, readFile, writeFile } from 'fs-extra'
 
 import { HEADER_COMMENT } from './constants'
 
+const toNetlifyPath = (fromPath: string, toPath: string): Array<string> => {
+ // Modifies query parameter redirects, having no effect on other fromPath strings
+ const netlifyFromPath = fromPath.replace(/[&?]/, ' ')
+ // Modifies wildcard & splat redirects, having no effect on other toPath strings
+ const netlifyToPath = toPath.replace(/\*/, ':splat')
+
+  return [
+    netlifyFromPath,
+    netlifyToPath,
+  ]
+}
+
 // eslint-disable-next-line max-statements
-export default async function writeRedirectsFile(pluginData, redirects, rewrites) {
+export default async function writeRedirectsFile(pluginData: any, redirects: any, rewrites: any) {
   const { publicFolder } = pluginData
 
   if (redirects.length === 0 && rewrites.length === 0) return null
@@ -17,12 +29,16 @@ export default async function writeRedirectsFile(pluginData, redirects, rewrites
     `headers`,
     `signed`,
     `edge_handler`,
-    `Language`,
-    `Country`,
+  ])
+
+  const NETLIFY_CONDITIONS_ALLOWLIST = new Set([
+    `language`,
+    `country`,
   ])
 
   // Map redirect data to the format Netlify expects
-  redirects = redirects.map((redirect) => {
+  // eslint-disable-next-line max-statements
+  redirects = redirects.map((redirect: any) => {
     const { fromPath, isPermanent, redirectInBrowser, force, toPath, statusCode, ...rest } = redirect
 
     let status = isPermanent ? `301` : `302`
@@ -30,17 +46,30 @@ export default async function writeRedirectsFile(pluginData, redirects, rewrites
 
     if (force) status = `${status}!`
 
+    const [netlifyFromPath, netlifyToPath] = toNetlifyPath(fromPath, toPath)
+
     // The order of the first 3 parameters is significant.
     // The order for rest params (key-value pairs) is arbitrary.
-    const pieces = [fromPath, toPath, status]
+    const pieces = [netlifyFromPath, netlifyToPath, status]
 
     for (const key in rest) {
       const value = rest[key]
 
       if (typeof value === `string` && value.includes(` `)) {
-        console.warn(
-          `Invalid redirect value "${value}" specified for key "${key}". ` + `Values should not contain spaces.`,
-        )
+        console.warn(`Invalid redirect value "${value}" specified for key "${key}". Values should not contain spaces.`)
+      } else if (key === 'conditions') {
+        // "conditions" key from Gatsby contains only "language" and "country"
+        // which need special transformation to match Netlify _redirects
+        // https://www.gatsbyjs.com/docs/reference/config-files/actions/#createRedirect
+
+        for (const conditionKey in value) {
+          if (NETLIFY_CONDITIONS_ALLOWLIST.has(conditionKey)) {
+            const conditionValue = Array.isArray(value[conditionKey]) ? value[conditionKey].join(',') : value[conditionKey]
+            // Gatsby gives us "country", we want "Country"
+            const conditionName = conditionKey.charAt(0).toUpperCase() + conditionKey.slice(1)
+            pieces.push(`${conditionName}=${conditionValue}`)
+          }
+        }
       } else if (NETLIFY_REDIRECT_KEYWORDS_ALLOWLIST.has(key)) {
         pieces.push(`${key}=${value}`)
       }
@@ -49,7 +78,7 @@ export default async function writeRedirectsFile(pluginData, redirects, rewrites
     return pieces.join(`  `)
   })
 
-  rewrites = rewrites.map(({ fromPath, toPath }) => `${fromPath}  ${toPath}  200`)
+  rewrites = rewrites.map(({ fromPath, toPath }: any) => `${fromPath}  ${toPath}  200`)
 
   let commentFound = false
 

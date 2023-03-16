@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`create-redirects writes file 1`] = `
+"
+## Created with gatsby-plugin-netlify
+/foo  /bar  302
+/blog  /canada/blog  302  Country=ca
+/speaker  /english/speaker  302  Language=en
+/speaker  /french/speaker  302  Language=fr
+/param id=7  /test  302
+/dogs/*  /animals/:splat  302
+/cats id=:id  /animals/:id  302"
+`;
