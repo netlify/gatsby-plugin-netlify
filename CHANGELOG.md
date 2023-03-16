@@ -5,74 +5,80 @@ All notable changes to this project will be documented in this file. See
 
 ## [5.1.0](https://www.github.com/netlify/gatsby-plugin-netlify/compare/v5.0.1...v5.1.0) (2022-11-30)
 
-
 ### Features
 
-* support Gatsby v5 ([#203](https://www.github.com/netlify/gatsby-plugin-netlify/issues/203)) ([5bda14f](https://www.github.com/netlify/gatsby-plugin-netlify/commit/5bda14f3da4a1e0d8faefab3eca8536095796318))
-
+- support Gatsby v5 ([#203](https://www.github.com/netlify/gatsby-plugin-netlify/issues/203))
+  ([5bda14f](https://www.github.com/netlify/gatsby-plugin-netlify/commit/5bda14f3da4a1e0d8faefab3eca8536095796318))
 
 ### Bug Fixes
 
-* **deps:** update dependency @babel/runtime to v7.19.4 ([#186](https://www.github.com/netlify/gatsby-plugin-netlify/issues/186)) ([0f51e02](https://www.github.com/netlify/gatsby-plugin-netlify/commit/0f51e020da5e55830754b39d78252eb3339f67cd))
-* **deps:** update dependency @babel/runtime to v7.20.0 ([#192](https://www.github.com/netlify/gatsby-plugin-netlify/issues/192)) ([214e991](https://www.github.com/netlify/gatsby-plugin-netlify/commit/214e991d48c98dc37575284788d468a5a4ed5f5e))
+- **deps:** update dependency @babel/runtime to v7.19.4
+  ([#186](https://www.github.com/netlify/gatsby-plugin-netlify/issues/186))
+  ([0f51e02](https://www.github.com/netlify/gatsby-plugin-netlify/commit/0f51e020da5e55830754b39d78252eb3339f67cd))
+- **deps:** update dependency @babel/runtime to v7.20.0
+  ([#192](https://www.github.com/netlify/gatsby-plugin-netlify/issues/192))
+  ([214e991](https://www.github.com/netlify/gatsby-plugin-netlify/commit/214e991d48c98dc37575284788d468a5a4ed5f5e))
 
 ### [5.0.1](https://www.github.com/netlify/gatsby-plugin-netlify/compare/v5.0.0...v5.0.1) (2022-07-25)
 
-
 ### Bug Fixes
 
-* **deps:** update dependency fs-extra to v10.1.0 ([#145](https://www.github.com/netlify/gatsby-plugin-netlify/issues/145)) ([1e4cdf5](https://www.github.com/netlify/gatsby-plugin-netlify/commit/1e4cdf503efe10d2649cbc063e422c4f8e5f2557))
+- **deps:** update dependency fs-extra to v10.1.0
+  ([#145](https://www.github.com/netlify/gatsby-plugin-netlify/issues/145))
+  ([1e4cdf5](https://www.github.com/netlify/gatsby-plugin-netlify/commit/1e4cdf503efe10d2649cbc063e422c4f8e5f2557))
 
 ## [5.0.0](https://www.github.com/netlify/gatsby-plugin-netlify/compare/v4.4.0...v5.0.0) (2022-05-24)
 
-
 ### ⚠ BREAKING CHANGES
 
-* Remove script preloading (#134)
+- Remove script preloading (#134)
 
 ### Features
 
-* Remove script preloading ([#134](https://www.github.com/netlify/gatsby-plugin-netlify/issues/134)) ([5a0397a](https://www.github.com/netlify/gatsby-plugin-netlify/commit/5a0397a8c80914070de03445538d7449ca085cad))
+- Remove script preloading ([#134](https://www.github.com/netlify/gatsby-plugin-netlify/issues/134))
+  ([5a0397a](https://www.github.com/netlify/gatsby-plugin-netlify/commit/5a0397a8c80914070de03445538d7449ca085cad))
 
 ## [4.4.0](https://www.github.com/netlify/gatsby-plugin-netlify/compare/v4.3.1...v4.4.0) (2022-05-18)
 
-
 ### Features
 
-* write granular info into skip file ([#128](https://www.github.com/netlify/gatsby-plugin-netlify/issues/128)) ([abefe10](https://www.github.com/netlify/gatsby-plugin-netlify/commit/abefe10bcf5cf28ba1eaf1372ac513315797725e))
+- write granular info into skip file ([#128](https://www.github.com/netlify/gatsby-plugin-netlify/issues/128))
+  ([abefe10](https://www.github.com/netlify/gatsby-plugin-netlify/commit/abefe10bcf5cf28ba1eaf1372ac513315797725e))
 
 ### [4.3.1](https://www.github.com/netlify/gatsby-plugin-netlify/compare/v4.3.0...v4.3.1) (2022-04-27)
 
-
 ### Bug Fixes
 
-* redirect named splat filesystem routes correctly for SSR/DSG pages ([#120](https://www.github.com/netlify/gatsby-plugin-netlify/issues/120)) ([cebe8d8](https://www.github.com/netlify/gatsby-plugin-netlify/commit/cebe8d85740c1148702994faf2fa2477e9c1e197))
+- redirect named splat filesystem routes correctly for SSR/DSG pages
+  ([#120](https://www.github.com/netlify/gatsby-plugin-netlify/issues/120))
+  ([cebe8d8](https://www.github.com/netlify/gatsby-plugin-netlify/commit/cebe8d85740c1148702994faf2fa2477e9c1e197))
 
 ## [4.3.0](https://www.github.com/netlify/gatsby-plugin-netlify/compare/v4.2.0...v4.3.0) (2022-04-20)
 
-
 ### Features
 
-* Add support for advanced redirect types ([#117](https://www.github.com/netlify/gatsby-plugin-netlify/issues/117)) ([d547a28](https://www.github.com/netlify/gatsby-plugin-netlify/commit/d547a28dfdd193c0cf38b26b9c24e4fb2c5c3fee))
+- Add support for advanced redirect types ([#117](https://www.github.com/netlify/gatsby-plugin-netlify/issues/117))
+  ([d547a28](https://www.github.com/netlify/gatsby-plugin-netlify/commit/d547a28dfdd193c0cf38b26b9c24e4fb2c5c3fee))
 
 ## [4.2.0](https://www.github.com/netlify/gatsby-plugin-netlify/compare/v4.1.0...v4.2.0) (2022-04-04)
 
-
 ### Features
 
-* add redirects for DSG pages ([#102](https://www.github.com/netlify/gatsby-plugin-netlify/issues/102)) ([3efa580](https://www.github.com/netlify/gatsby-plugin-netlify/commit/3efa580f3c469c2e394e5e55ce4ff7aa0d0425d7))
-
+- add redirects for DSG pages ([#102](https://www.github.com/netlify/gatsby-plugin-netlify/issues/102))
+  ([3efa580](https://www.github.com/netlify/gatsby-plugin-netlify/commit/3efa580f3c469c2e394e5e55ce4ff7aa0d0425d7))
 
 ### Bug Fixes
 
-* **deps:** update dependency fs-extra to v10.0.1 ([#86](https://www.github.com/netlify/gatsby-plugin-netlify/issues/86)) ([ea7e98e](https://www.github.com/netlify/gatsby-plugin-netlify/commit/ea7e98e7a916e6984b0a61b11b2222b7884ef832))
+- **deps:** update dependency fs-extra to v10.0.1
+  ([#86](https://www.github.com/netlify/gatsby-plugin-netlify/issues/86))
+  ([ea7e98e](https://www.github.com/netlify/gatsby-plugin-netlify/commit/ea7e98e7a916e6984b0a61b11b2222b7884ef832))
 
 ## [4.1.0](https://www.github.com/netlify/gatsby-plugin-netlify/compare/v4.0.0...v4.1.0) (2022-01-26)
 
-
 ### Features
 
-* disable Netlify functions if not needed ([#65](https://www.github.com/netlify/gatsby-plugin-netlify/issues/65)) ([d4ed977](https://www.github.com/netlify/gatsby-plugin-netlify/commit/d4ed97755a57cb3b9185d00b087186197967a692))
+- disable Netlify functions if not needed ([#65](https://www.github.com/netlify/gatsby-plugin-netlify/issues/65))
+  ([d4ed977](https://www.github.com/netlify/gatsby-plugin-netlify/commit/d4ed97755a57cb3b9185d00b087186197967a692))
 
 ## 4.0.0 (2022-01-19)
 
