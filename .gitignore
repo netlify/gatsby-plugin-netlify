@@ -1,6 +1,7 @@
 /*.js
 !.*.js
 !index.js
+!polyfill-node-protocol-imports.js
 node_modules
 yarn-error.log
 .DS_Store
