@@ -2,6 +2,7 @@
 import { join } from 'path'
 
 import { writeJson, remove } from 'fs-extra'
+import type { GatsbyNode } from 'gatsby'
 import { generatePageDataPath } from 'gatsby-core-utils'
 import WebpackAssetsManifest from 'webpack-assets-manifest'
 
@@ -10,10 +11,9 @@ import { DEFAULT_OPTIONS, BUILD_BROWSER_BUNDLE_STAGE, PAGE_COUNT_WARN } from './
 import createRedirects from './create-redirects'
 import makePluginData from './plugin-data'
 
-const assetsManifest = {}
+const assetsManifest: Record<string, unknown> = {}
 
-/** @type {import("gatsby").GatsbyNode["pluginOptionsSchema"]} */
-export const pluginOptionsSchema = ({ Joi }: any) => {
+export const pluginOptionsSchema: GatsbyNode["pluginOptionsSchema"] = ({ Joi }) => {
   const MATCH_ALL_KEYS = /^/
 
   // headers is a specific type used by Netlify: https://www.gatsbyjs.com/plugins/gatsby-plugin-netlify/#headers
@@ -41,9 +41,7 @@ export const pluginOptionsSchema = ({ Joi }: any) => {
 }
 
 // Inject a webpack plugin to get the file manifests so we can translate all link headers
-/** @type {import("gatsby").GatsbyNode["onCreateWebpackConfig"]} */
-
-export const onCreateWebpackConfig = ({ actions, stage }: any) => {
+export const onCreateWebpackConfig: GatsbyNode["onCreateWebpackConfig"] = ({ actions, stage }) => {
   // We only need to get manifest for production browser bundle
   if (stage !== BUILD_BROWSER_BUNDLE_STAGE) {
     return
@@ -59,8 +57,7 @@ export const onCreateWebpackConfig = ({ actions, stage }: any) => {
   })
 }
 
-/** @type {import("gatsby").GatsbyNode["onPostBuild"]} */
-export const onPostBuild = async ({ store, pathPrefix, reporter }: any, userPluginOptions: any) => {
+export const onPostBuild: GatsbyNode["onPostBuild"] = async ({ store, pathPrefix, reporter }, userPluginOptions) => {
   const pluginData = makePluginData(store, assetsManifest, pathPrefix)
   const pluginOptions = { ...DEFAULT_OPTIONS, ...userPluginOptions }
 
