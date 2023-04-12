@@ -11,10 +11,10 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: "*"
-          cache: "npm"
+          node-version: '*'
+          cache: 'npm'
           check-latest: true
-          registry-url: "https://registry.npmjs.org"
+          registry-url: 'https://registry.npmjs.org'
       - name: Install core dependencies
         run: npm ci --no-audit
       - name: Extract tag and version
