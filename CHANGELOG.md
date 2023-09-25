@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.1.1](https://github.com/netlify/gatsby-plugin-netlify/compare/v5.1.0...v5.1.1) (2023-09-25)
+
+
+### Bug Fixes
+
+* apply caching headers to all produced assets ([#217](https://github.com/netlify/gatsby-plugin-netlify/issues/217)) ([31e9249](https://github.com/netlify/gatsby-plugin-netlify/commit/31e924995d902849662c7a4fb955dd20bd430d60))
+* **deps:** update dependency fs-extra to v11 ([#256](https://github.com/netlify/gatsby-plugin-netlify/issues/256)) ([aa3184c](https://github.com/netlify/gatsby-plugin-netlify/commit/aa3184c285e7c1b2937a88f8f1f6d7d7e0d563b5))
+* add path to `transformHeaders` ([#276](https://github.com/netlify/gatsby-plugin-netlify/pull/276))
+* 
 ## [5.1.0](https://www.github.com/netlify/gatsby-plugin-netlify/compare/v5.0.1...v5.1.0) (2022-11-30)
 
 ### Features
