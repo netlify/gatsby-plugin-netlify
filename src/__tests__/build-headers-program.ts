@@ -116,4 +116,41 @@ describe(`build-headers-program`, () => {
 
     expect(reporter.panic).toHaveBeenCalled()
   })
+
+  it(`with all page headers configuration`, async () => {
+    const pluginData = await createPluginData()
+
+    const pluginOptions = {
+      ...DEFAULT_OPTIONS,
+      allPageHeaders: [
+        `X-Custom-PageHeader: SomeCustomValue`
+      ]
+    }
+
+    await buildHeadersProgram(pluginData, pluginOptions, reporter)
+
+    expect(reporter.panic).not.toHaveBeenCalled()
+    expect(await readFile(pluginData.publicFolder(`_headers`), `utf8`)).toMatchSnapshot()
+  })  
+
+  it(`with transform headers configuration`, async () => {
+    const pluginData = await createPluginData()
+
+    const pluginOptions = {
+      ...DEFAULT_OPTIONS,
+      transformHeaders: (headers, path) => {
+        if (path !== '/webpack-runtime-acaa8994f1f704475e21.js') {
+          return headers
+        }        
+
+        headers.push('X-TransformedPageHeader: webpack-runtime')
+        return headers
+      }
+    }
+
+    await buildHeadersProgram(pluginData, pluginOptions, reporter)
+
+    expect(reporter.panic).not.toHaveBeenCalled()
+    expect(await readFile(pluginData.publicFolder(`_headers`), `utf8`)).toMatchSnapshot()
+  })
 })
