@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.1.2](https://github.com/netlify/gatsby-plugin-netlify/compare/v5.1.1...v5.1.2) (2024-06-24)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @babel/runtime to v7.23.8 ([adcf720](https://github.com/netlify/gatsby-plugin-netlify/commit/adcf7207f3de5983cb0b32cd821e1992f59ce678))
+* **deps:** update dependency fs-extra to v11.2.0 ([f4b7cff](https://github.com/netlify/gatsby-plugin-netlify/commit/f4b7cff888c8b7e734b52202d528e76e5683e113))
+* **deps:** update dependency webpack-assets-manifest to v5.2.1 ([50e169e](https://github.com/netlify/gatsby-plugin-netlify/commit/50e169e8e94323de399a492ca79b7d62946a7839))
+
 ## [5.1.1](https://github.com/netlify/gatsby-plugin-netlify/compare/v5.1.0...v5.1.1) (2023-09-25)
 
 
