@@ -9133,11 +9133,6 @@ lodash.get@^4.3.0, lodash.get@^4.4.2:
   resolved "https://registry.yarnpkg.com/lodash.get/-/lodash.get-4.4.2.tgz#2d177f652fa31e939b4438d5341499dfa3825e99"
   integrity sha512-z+Uw/vLuy6gQe8cfaFWD7p0wVv8fJl3mbzXh33RS+0oW2wvUqiRXiQ69gLWSLpgB5/6sU+r6BlQR0MBILadqTQ==
 
-lodash.has@^4.5.2:
-  version "4.5.2"
-  resolved "https://registry.yarnpkg.com/lodash.has/-/lodash.has-4.5.2.tgz#d19f4dc1095058cccbe2b0cdf4ee0fe4aa37c862"
-  integrity sha512-rnYUdIo6xRCJnQmbVFEwcxF144erlD+M3YcJUVesflU9paQaE8p+fJDcIQrlMYbxoANFL+AB9hZrzSBBk5PL+g==
-
 lodash.kebabcase@^4.1.1:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/lodash.kebabcase/-/lodash.kebabcase-4.1.1.tgz#8489b1cb0d29ff88195cceca448ff6d6cc295c36"
@@ -11313,7 +11308,7 @@ schema-utils@^2.6.5:
     ajv "^6.12.4"
     ajv-keywords "^3.5.2"
 
-schema-utils@^3.0.0, schema-utils@^3.1.1, schema-utils@^3.3.0:
+schema-utils@^3.0.0, schema-utils@^3.1.1:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/schema-utils/-/schema-utils-3.3.0.tgz#f50a88877c3c01652a15b622ae9e9795df7a60fe"
   integrity sha512-pN/yOAvcC+5rQ5nERGuwrjLlYvLTbCibnZ1I7B1LaiAz9BRBlE9GMgE/eqV30P7aJQUf7Ddimy/RsbYO/GrVGg==
@@ -12752,17 +12747,14 @@ webidl-conversions@^3.0.0:
   resolved "https://registry.yarnpkg.com/webidl-conversions/-/webidl-conversions-3.0.1.tgz#24534275e2a7bc6be7bc86611cc16ae0a5654871"
   integrity sha512-2JAn3z8AR6rjK8Sm8orRC0h/bcl/DqL7tRPdGZ4I1CjdF+EaMLmYxBHyXuKL849eucPFhvBoxMsflfOb8kxaeQ==
 
-webpack-assets-manifest@^5.0.6:
-  version "5.2.1"
-  resolved "https://registry.yarnpkg.com/webpack-assets-manifest/-/webpack-assets-manifest-5.2.1.tgz#7ebe4c882efdc343029ed2f54a6f7ce990406f08"
-  integrity sha512-MsEcXVio1GY6R+b4dVfTHIDMB0RB90KajQG8neRbH92vE2S1ClGw9mNa9NPlratYBvZOhExmN0qqMNFTaCTuIg==
+webpack-assets-manifest@^6.0.0:
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/webpack-assets-manifest/-/webpack-assets-manifest-6.0.1.tgz#20cda0eb97bec1dbd95b45e6c1c0a3d1edbf0ab0"
+  integrity sha512-mxYPsp6LBG4b0zHYR/9wy0k5grFGaWrBsbqhe/+qVPfpiL+1yzuS1jeLqF8oMJ/UsFixLZBuRsBEFkU/6uvDSw==
   dependencies:
-    chalk "^4.1.2"
     deepmerge "^4.3.1"
     lockfile "^1.0.4"
-    lodash.get "^4.4.2"
-    lodash.has "^4.5.2"
-    schema-utils "^3.3.0"
+    schema-utils "^4.3.0"
     tapable "^2.2.1"
 
 webpack-dev-middleware@^5.3.4:
