@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Download fossa cli
         run: |-
           curl -L https://github.com/fossas/fossa-cli/releases/download/v1.1.2/fossa-cli_1.1.2_linux_amd64.tar.gz > fossa-cli.tar.gz
