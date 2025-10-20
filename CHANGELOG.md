@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.1.2](https://github.com/netlify/gatsby-plugin-netlify/compare/v5.1.1...v5.1.2) (2025-10-20)
+
+
+### Bug Fixes
+
+* **deps:** update babel monorepo ([#392](https://github.com/netlify/gatsby-plugin-netlify/issues/392)) ([27a8641](https://github.com/netlify/gatsby-plugin-netlify/commit/27a8641b3783ad89f7e9cf1fcfa680783949a5d9))
+* **deps:** update babel monorepo to v7.26.10 ([#379](https://github.com/netlify/gatsby-plugin-netlify/issues/379)) ([8b3050d](https://github.com/netlify/gatsby-plugin-netlify/commit/8b3050d8f39943014ba2d72eaaec55dfbda6a4cf))
+* **deps:** update babel monorepo to v7.26.7 ([#371](https://github.com/netlify/gatsby-plugin-netlify/issues/371)) ([9dcdfab](https://github.com/netlify/gatsby-plugin-netlify/commit/9dcdfab7e038908974bb95b83923aaa34badb658))
+* **deps:** update babel monorepo to v7.26.9 ([#374](https://github.com/netlify/gatsby-plugin-netlify/issues/374)) ([48f9f2e](https://github.com/netlify/gatsby-plugin-netlify/commit/48f9f2eedc8a7a5d9ed54e1c2e19a6b715689c21))
+* **deps:** update babel monorepo to v7.27.0 ([#380](https://github.com/netlify/gatsby-plugin-netlify/issues/380)) ([a974cbb](https://github.com/netlify/gatsby-plugin-netlify/commit/a974cbb289833a000121b70d0e0ec9d8a0a26020))
+* **deps:** update babel monorepo to v7.27.1 ([#384](https://github.com/netlify/gatsby-plugin-netlify/issues/384)) ([112d6df](https://github.com/netlify/gatsby-plugin-netlify/commit/112d6dfc674b8771b02196d74f7fc3ad19dda3ff))
+* **deps:** update babel monorepo to v7.27.4 ([#386](https://github.com/netlify/gatsby-plugin-netlify/issues/386)) ([4779981](https://github.com/netlify/gatsby-plugin-netlify/commit/4779981da16bb7adcede86986d9987bb8f61d41f))
+* **deps:** update babel monorepo to v7.28.4 ([#394](https://github.com/netlify/gatsby-plugin-netlify/issues/394)) ([8c0b602](https://github.com/netlify/gatsby-plugin-netlify/commit/8c0b6028255a530d49a41f071affb284b4b23528))
+* **deps:** update dependency @babel/runtime to v7.23.8 ([adcf720](https://github.com/netlify/gatsby-plugin-netlify/commit/adcf7207f3de5983cb0b32cd821e1992f59ce678))
+* **deps:** update dependency @babel/runtime to v7.25.4 ([ca810fb](https://github.com/netlify/gatsby-plugin-netlify/commit/ca810fba8846081787fea41eabdc49c77d174277))
+* **deps:** update dependency fs-extra to v11.2.0 ([f4b7cff](https://github.com/netlify/gatsby-plugin-netlify/commit/f4b7cff888c8b7e734b52202d528e76e5683e113))
+* **deps:** update dependency fs-extra to v11.3.0 ([#370](https://github.com/netlify/gatsby-plugin-netlify/issues/370)) ([426ad9a](https://github.com/netlify/gatsby-plugin-netlify/commit/426ad9aaaa6f7a1b48c94d9ceb8cae7cea039843))
+* **deps:** update dependency fs-extra to v11.3.1 ([#389](https://github.com/netlify/gatsby-plugin-netlify/issues/389)) ([3be1d8e](https://github.com/netlify/gatsby-plugin-netlify/commit/3be1d8ed074410997a21d06a7fe05894be49e7f6))
+* **deps:** update dependency webpack-assets-manifest to v5.2.1 ([50e169e](https://github.com/netlify/gatsby-plugin-netlify/commit/50e169e8e94323de399a492ca79b7d62946a7839))
+* **deps:** update gatsby monorepo ([#395](https://github.com/netlify/gatsby-plugin-netlify/issues/395)) ([7abb115](https://github.com/netlify/gatsby-plugin-netlify/commit/7abb115607fc66c6ae071111296830423feed280))
+
 ## [5.1.1](https://github.com/netlify/gatsby-plugin-netlify/compare/v5.1.0...v5.1.1) (2023-09-25)
 
 
