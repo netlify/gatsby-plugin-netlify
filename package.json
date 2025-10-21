@@ -18,7 +18,7 @@
     "gatsby-core-utils": "^4.0.0",
     "kebab-hash": "^0.1.2",
     "lodash.mergewith": "^4.6.2",
-    "webpack-assets-manifest": "^5.0.6"
+    "webpack-assets-manifest": "^6.0.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.16.8",
